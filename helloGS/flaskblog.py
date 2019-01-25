@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route("/")
 
-@app.route("/Welcome to Gold-Schudler!")
+@app.route("/Welcome to Gold-Scheduler!")
 def home():
     return "<h1>Home Page!</h1>"
 
