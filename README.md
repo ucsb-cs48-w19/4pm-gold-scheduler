@@ -11,12 +11,12 @@ A webapp for UCSB students to help them plan their fututre quarter schedules
 The user can make their multiple schedules on one page. Easy for them to register class and plan their class process. 
 
 ## Installation
-None
+[None](URL)
 
 ### Prerequisites
 A web browser and a computer
 
-### Gems (Libraries?)
+### Add-ons
 N/A
 
 ### Installation Steps
