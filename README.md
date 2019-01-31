@@ -10,18 +10,20 @@ A webapp for UCSB students to help them plan their fututre quarter schedules
 ### Additional information about the project
 The user can make their multiple schedules on one page. Easy for them to register class and plan their class process. 
 
-## Installation
-[None](URL)
-
 ### Prerequisites
-A web browser and a computer
+1. pip
+2. python3 
+3. flask 
+4. postgreSQL
+5. gunicorn
 
-### Add-ons
-N/A
-
-### Installation Steps
-TBD
-
+## Installation
+1. Install [pip](https://pip.pypa.io/en/latest/installing/)
+2. Install virtual environment:  `$ pip install virtualenv`
+3. Under your project file: `$ virtualenv venv`
+4. Active virtualenv: `$ source venv/bin/activate`
+5. Install Flask: `$ pip install Flask`
+6. Install dependencies: `$ pip install -r requirements.txt`
 
 ## Functionality
 Select the classes from the class box, drag and drop into generate box, click the generae button. All possible weekly schedules will be displayed on the calandar
