@@ -23,14 +23,17 @@ The user can make their multiple schedules on one page. Easy for them to registe
 3. Under your project file: `$ virtualenv venv`
 4. Active virtualenv: `$ source venv/bin/activate`
 5. Install Flask: `$ pip install Flask`
-6. Install dependencies: `$ pip install -r requirements.txt`
+6. Install gunicorn: `$ pip install gunicorn`
 
 ## Functionality
 Select the classes from the class box, drag and drop into generate box, click the generae button. All possible weekly schedules will be displayed on the calandar
 
 
 ## Known Problems
-Time Conflict notes show wrong. Class shows on the wrong place of the schedule. Try to delete some classes, and see if the notes show right. Refresh the page.
+1. Time Conflict notes show wrong. 
+2. Class shows on the wrong place of the schedule. 
+3. Try to delete some classes, and see if the notes show right. 
+4. Refresh the page.
 
 ## Contributing
 
