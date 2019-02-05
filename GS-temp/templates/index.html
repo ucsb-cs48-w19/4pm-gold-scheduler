@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block content %}
+	<main class="class-section">
+
+        <div class="table">
+            <div clss="subject-table">
+                <label>Subject</label>
+                <select id = "subjectList">
+                    <option value = "1">Courses</option>
+                    <option value = "2">one</option>
+                    <option value = "3">two</option>
+                    <option value = "4">Computer Science</option>
+                </select>
+            </div>
+            <div clss="course-table">
+                <label>Course</label>
+                <select id = "courseList">
+                    <option value = "1">classes</option>
+                    <option value = "2">one</option>
+                    <option value = "3">CS 48</option>
+                    <option value = "4">three</option>
+                </select>
+            </div>
+            <div clss="section-table">
+                <label>Section</label>
+                <select id = "sectionList">
+                    <option value = "1">section</option>
+                    <option value = "2">4:00pm-4:50pm</option>
+                    <option value = "3">two</option>
+                    <option value = "4">three</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="navbar">
+            <a href="#Search" class="active">Search</a>
+        </div>
+
+	</main>
+{% endblock %}
