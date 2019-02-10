@@ -1,0 +1,73 @@
+main {
+  text-align: center;
+}
+
+body {
+  font-family: 'Trebuchet MS', sans-serif;
+  margin: 0;
+  text-align: center;
+}
+a {
+  color: green;
+  font-size: 50px;
+}
+.navbar a:hover {
+  text-decoration: none;
+}
+h1, h2 {
+  font-family: 'Trebuchet MS', sans-serif;
+  font-weight: 400;
+}
+h1 {
+  font-size: 80px;
+  color: black;
+  opacity: 0.7;
+}
+.lol {
+  font-size: 40px;
+  margin-top: 0;
+  color: purple;
+}
+.content-wrap {
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 50px;
+  overflow: hidden;
+}
+
+.container select {
+  
+  background: transparent;
+  width: 300px;
+  font-size: 20pt;
+  color:grey;
+  border: 0;
+  border-radius: 0;
+  height: 30px;
+  -webkit-appearance: none;
+
+   
+}
+
+.conatiner select:focus {
+  outline: none;
+}
+
+.subject-table {
+  padding: 20px;
+  display: grid;
+  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: auto;
+  margin-top: auto;
+}
+
+#subjectList {
+  margin: auto;
+  margin-right: 450px;
+  padding: 0px;
+}
+
+
+
