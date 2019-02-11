@@ -1,15 +1,56 @@
-from flask import Flask, render_template
+from typing import Dict, Any
+
+from flask import Flask, render_template, request
+from flask_sqlalchemy import SQLAlchemy
+#from flask_wtf import FlaskForm
+#from wtforms_sqlalchemy.fields import QuerySelectField
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://jxxblesrascyio:a447ed84172575a035b9fa57af3f819f0c1163fe46da6c3469f110293e0412f1@ec2-54-243-223-245.compute-1.amazonaws.com:5432/d37d890uhbs9gv'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://postgres:king2530367@localhost:5432/postgres'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
+class gs(db.Model):
+
+    __tablename__= "GStable"
+
+    id = db.Column(db.Integer, primary_key=True)
+    subjectName = db.Column(db.String(100), unique=False)
+    courseID = db.Column(db.String(100), unique=False)
+    lecOrSection = db.Column(db.String(100), unique=False)
+    enrollCode = db.Column(db.String(100), unique=False)
+    days = db.Column(db.String(100), unique=False)
+    times = db.Column(db.String(100), unique=False)
+    locations = db.Column(db.String(100), unique=False)
+
+    def __init__(self, subjectName, courseID, lecOrSection, enrollCode, days, times, locations):
+        self.subjectName = subjectName
+        self.courseID = courseID
+        self.lecOrSection = lecOrSection
+        self.enrollCode = enrollCode
+        self.days = days
+        self.times = times
+        self.locations = locations
+
 
 @app.route("/")
 def index():
-	return render_template("index.html")
+    datas = gs.query.all()
 
-@app.route("/calendar")
+    subject_set = set()
+    for r in datas:
+        subject_set.add(r.subjectName)
+
+    return render_template('index.html', displayData=sorted(subject_set))
+
+
+@app.route('/calendar')
 def calendar():
-    return render_template("index1.html")
+    return render_template('calendar.html')
 
 
 if __name__ == "__main__":
-	app.run(debug=True)
+    db.create_all()
+    app.run(debug=True)
