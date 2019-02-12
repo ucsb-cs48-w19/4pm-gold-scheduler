@@ -9,7 +9,7 @@
                 <select id = "subjectList">
                     <option value = 1>---select-your-subject---</option>
                     {%  for r in displayData %}k
-                        <option value = {{ r }}>{{ r }}</option>
+                        <option value = {{ r }}>{{ r.times }}</option>
                     {% endfor %}
                 </select>
             </div>
