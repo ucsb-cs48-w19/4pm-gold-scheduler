@@ -1,13 +1,16 @@
 from typing import Dict, Any
-
-from flask import Flask, render_template, request
+import os
+from flask import Flask, render_template, request, app
 from flask_sqlalchemy import SQLAlchemy
+
+import psycopg2
 #from flask_wtf import FlaskForm
 #from wtforms_sqlalchemy.fields import QuerySelectField
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://jxxblesrascyio:a447ed84172575a035b9fa57af3f819f0c1163fe46da6c3469f110293e0412f1@ec2-54-243-223-245.compute-1.amazonaws.com:5432/d37d890uhbs9gv'
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://postgres:king2530367@localhost:5432/postgres'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://jxxblesrascyio:a447ed84172575a035b9fa57af3f819f0c1163fe46da6c3469f110293e0412f1@ec2-54-243-223-245.compute-1.amazonaws.com:5432/d37d890uhbs9gv'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -38,12 +41,16 @@ class gs(db.Model):
 @app.route("/")
 def index():
     datas = gs.query.all()
+    courseData = db.session.query(gs).filter(gs.subjectName == "Anthropology").all()
 
     subject_set = set()
+    couseID_set = set()
     for r in datas:
         subject_set.add(r.subjectName)
 
-    return render_template('index.html', displayData=sorted(subject_set))
+
+
+    return render_template('index.html', displayData=courseData)
 
 
 @app.route('/calendar')
