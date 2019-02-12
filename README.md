@@ -1,5 +1,5 @@
 # Project Gold Scheduler
-
+[GS](https://protected-depths-20813.herokuapp.com)
 ## Project summary
 Gold Scheduler helps UCSB students plan their upcomming quarter by making easier for them to visualize multiple potential schedules. It uses a calandar-like view with multiple windows, each window is a schedule. The user can select the classes available for the quarter selected and filter out classes just like in GOLD. From there they can drag the class into the calandar, have its lecture and section times displayed, any potential conflicts are highlighted and can be easily resolved.  
 
