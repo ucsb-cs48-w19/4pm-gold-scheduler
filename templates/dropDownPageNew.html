@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>TestingDropdown</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+</head>
+<body onload = "addSubject()">
+
+	<select id="subject" onchange="postSubject(this.val) ">
+		<option value="0">--Please Choose--</option>
+	</select>
+
+	<select id="class">
+		<option value="0">--Please Choose--</option>
+	</select>
+
+	<!--<select id="time">
+		<option value="0">--Please Choose--</option>
+	</select> -->
+
+</body>
+	<script type="text/javascript">
+		var subjectArr = {{ displayData|tojson }};
+		function addSubject() {
+			var subject1 = document.getElementById("subject");
+			for(var j = 0; j<subjectArr.length; j++)
+					{
+						var value1 = subjectArr[j];
+						var option1 = document.createElement("option");
+						var text1 = document.createTextNode(value1);
+						option1.appendChild(text1);
+						subject1.appendChild(option1);
+					}
+		}
+
+
+
+
+
+
+
+		function add1(val) {
+
+
+			var arr1 = ["1", "2", "3"];
+
+
+			var class1 = document.getElementById("class");
+			var options1 = class1.getElementsByTagName("option");
+			for(var m = 0; m<options1.length; m++)
+			{
+				var op = options1[m];
+				class1.removeChild(op); 
+				m--;
+			}
+			//alert(val);
+			for(var i = 0; i<arr1.length; i++)
+			{
+				var arr2 = arr1[i];
+				var firstValue = arr2[0];
+				var class1 = document.getElementById("class");
+				if(firstValue==val)
+				{
+					for(var j = 1; j<arr2.length; j++)
+					{
+						var value1 = arr2[j];
+						var option1 = document.createElement("option");
+						var text1 = document.createTextNode(value1);
+						option1.appendChild(text1);
+						class1.appendChild(option1);
+					}
+				}
+			}
+		}
+
+		function add2(val) {
+			var arr1 = new Array(16);
+			arr1[0] = ["Math1","M11","M12","M13"];
+			arr1[1] = ["Math2","M21","M22"];
+			arr1[2] = ["Math3","M31","M32"];
+			arr1[3] = ["Math4","M41","M42"];
+			arr1[4] = ["CS8", "CS81", "CS82"];
+			arr1[5] = ["CS16","CS161","CS162"];
+			arr1[6] = ["CS48","CS481","CS482"];
+			arr1[7] = ["CS138","CS1381","CS1382"];
+			arr1[8] = ["English1", "E11","E12"];
+			arr1[9] = ["English2", "E21","E22"];
+			arr1[10] = ["English3", "E31","E32"];
+			arr1[11] = ["English4", "E41","E42"];
+			arr1[12] = ["PSTAT10","P101", "P102"];
+			arr1[13] = ["PSTAT120A","P120A1"];
+			arr1[14] = ["PSTAT120B","P120B1"];
+			arr1[15] = ["PSTAT120C","P120C1", "P120C2"];
+
+
+			var time1 = document.getElementById("time");
+			var options1 = time1.getElementsByTagName("option");
+			for(var m = 0; m<options1.length; m++)
+			{
+				var op = options1[m];
+				time1.removeChild(op); 
+				m--;
+			}
+			//alert(val);
+			for(var i = 0; i<arr1.length; i++)
+			{
+				var arr2 = arr1[i];
+				var firstValue = arr2[0];
+				var time1 = document.getElementById("time");
+				if(firstValue==val)
+				{
+					for(var j = 1; j<arr2.length; j++)
+					{
+						var value1 = arr2[j];
+						var option1 = document.createElement("option");
+						var text1 = document.createTextNode(value1);
+						option1.appendChild(text1);
+						time1.appendChild(option1);
+					}
+				}
+			}
+		}
+
+		    //$.post("/load_ajax", {
+		      // data: JSON.stringify("world"),
+            //}, function(data, status) {
+		      //  alert(data);
+            //});
+        function postSubject(val) {
+		    var val1 = val;
+            alert(val1);
+		    $.ajax({
+            type : "POST",
+            url : "/load_ajax",
+            data: val1,
+            contentType: 'application/json;charset=UTF-8',
+            success: function(result) {
+
+
+
+
+
+                //alert(result);
+                var arr1 = clearData(result);
+			    var class1 = document.getElementById("class");
+			    for(var j = 0; j<arr1.length; j++)
+					{
+						var value1 = arr1[j];
+						var option1 = document.createElement("option");
+						var text1 = document.createTextNode(value1);
+						option1.appendChild(text1);
+						class1.appendChild(option1);
+					}
+
+
+
+
+
+
+            }
+        });
+        }
+
+
+		function allfunction1(val) {
+			//add1(val);
+			//var classVal = document.getElementById("class").value;
+			//add2(classVal);
+			postSubject(val);
+		}
+
+		function clearData (string) {
+            var s1 = string.substring(1);
+            var s2 = s1.substring(0, s1.length-1);
+            var goodData = s2.split(",");
+            return goodData;
+        }
+
+	</script>
+</html>
+
+
+
+
+
+
+
+
+
+
