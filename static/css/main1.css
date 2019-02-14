@@ -1,0 +1,80 @@
+/* Global styles
+------------------------------------*/
+body {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+}
+a {
+  color: #EF233C;
+  font-size: 30px;
+}
+a:hover {
+  text-decoration: none;
+}
+h1, h2 {
+  font-family: 'Caveat', cursive;
+  font-weight: 400;
+}
+h1 {
+  font-size: 80px;
+}
+h2 {
+  font-size: 40px;
+  margin-top: 0;
+}
+.content-wrap {
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 50px;
+  overflow: hidden;
+}
+
+
+
+/* Header & Footer
+------------------------------------*/
+header,
+footer {
+  background: #6CE4FC;
+  color: #8D99AE;
+}
+header h1,
+header h2 {
+  color: #EDF2F4;
+  margin: 0;
+}
+
+/* Header styles only */
+header {
+  /*text-align: center;*/
+}
+.profile-img {
+  width: 300px;
+  border-radius: 50%;
+  float: left;
+  margin-right: 30px;
+}
+
+/* Footer styles only */
+footer {
+  text-align: center;
+}
+.contact-info a {
+  padding: 10px;
+  display: inline-block;
+}
+
+
+
+/* Work Experience
+------------------------------------*/
+.description {
+  background: #EDF2F4;
+}
+
+
+/* Education
+------------------------------------*/
+.education {
+    background: #8D99AE;
+}
