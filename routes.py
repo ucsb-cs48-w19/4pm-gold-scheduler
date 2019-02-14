@@ -1,6 +1,5 @@
-
 import json
-from flask import Flask, render_template, request, app, jsonify
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -63,6 +62,7 @@ def load_ajax():
 
     return json.dumps(sorted(return_set))
 
+
 @app.route('/load_ajax2', methods=["GET", "POST"])
 def load_ajax2():
     courseName = request.get_json()
@@ -90,6 +90,7 @@ def load_ajax2():
         return_list.append(temp)
 
     return json.dumps(return_list)
+
 
 @app.route('/load_ajax3', methods=["GET", "POST"])
 def load_ajax3():
@@ -125,4 +126,4 @@ def load_ajax3():
 
 if __name__ == "__main__":
     db.create_all()
-    app.run(debug=False)
+    app.run(debug=True)
