@@ -11,7 +11,7 @@
     <!-- We should have some nice font -->
     <header>
         <div class="content-wrap">
-            <img class="profile-img" src="../images/coffee1.jpg" alt="coffee">
+            <img class="profile-img" src= {{ url_for('static', filename='images/coffee1.jpg') }} alt="coffee">
             <h1>Gold Scheduler</h1>
             <h2>A webapp designed by UCSB students for UCSB students!</h2>
         </div>
@@ -28,7 +28,7 @@
 
             <h4>Click below to begin!</h4>
 
-            <a href="{{ url_for("dropDownPageNew") }}"> Take me to Gold Scheduler</a>
+            <a href="{{ url_for("dropDownPageNew") }}" class="button1 bouncy"> Take me to Gold Scheduler</a>
         </div>
    </section>
   </main>
