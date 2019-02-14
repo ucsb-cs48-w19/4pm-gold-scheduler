@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Gold Scheduler</title>
+  </head>
+  <body>
+    <!-- We should have some nice font -->
+    <h1>Gold Scheduler</h1>
+    <h2>A webapp designed by UCSB students for UCSB students!</h2>
+
+    <!-- We should try and use UC Blue and Gold colors as the color themes -->
+    <div id="description">
+      <p> Gold Scheduler is a way to help UCSB students plan out their schedules for their upcomming quarters. </p>
+      <br><br>
+      <p> When you're registering for classes in GOLD, you may have a number of different classes, lectures, and sections to choose from. GOLD, unfortunately, can only show you what your quarter will look like if you manage to successfully enroll in those classes. What about classes that you're waitlisted for? Classes you're interested outside your curriculum plan? </p>
+      <br>
+      <p> Gold Scheduler can allow you to make schedules for any class combinations that you are thinking of taking in the upcoming quarter. That way you can plan your new quarter accordingly and know that you made the best choice of lectures and sections that fit your needs! </p>
+
+      <h4>TL;DR: Click below to begin!</h4>
+      <a href="{{ url_for("dropDownPageNew") }}"> Take me to Gold Scheduler</a>
+    </div>
+  </body>
 </html>

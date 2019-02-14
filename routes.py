@@ -36,7 +36,13 @@ class gs(db.Model):
         self.times = times
         self.locations = locations
 
+
 @app.route('/')
+def index():
+    return render_template('index.html')
+
+
+@app.route('/class-select')
 def dropDownPageNew():
     datas = gs.query.all()
     subject_set = set()
