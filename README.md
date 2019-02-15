@@ -19,7 +19,7 @@ The user can make their multiple schedules on one page. Easy for them to registe
 ## Installation
 1. Fork the repo
 2. Install [pip](https://pip.pypa.io/en/latest/installing/)
-3. Install PostgreSQL on your machine: [Mac](https://postgresapp.com/) [Windows](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows)
+3. Install PostgreSQL on your machine: [Mac](https://postgresapp.com/) | [Windows](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows)
 4. Install virtual environment:  `$ pip install virtualenv`
 5. Under your project file: `$ virtualenv venv`
 6. Active virtualenv: `$ source venv/bin/activate`
@@ -33,6 +33,8 @@ Select the classes from the class box, add them to the weekly calendar with the 
 1. Leaving page does not save calendar
 2. Adding the same class again will result in a conflict
 3. Cannot remove classes from calendar once added
+4. Text for classes close on calendar might have text overlapping each other
+5. Class info text is not relative to screen size. Changing browser window size will put text outside block
 
 ## Contributing
 1. Fork it!
