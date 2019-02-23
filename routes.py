@@ -61,10 +61,6 @@ def load_ajax():
         return_list.append(r.courseID)
 
     return_list = list(dict.fromkeys(return_list))
-    # return_set = set()
-    # for r in returnData:
-    #     return_set.add(r.courseID)
-
 
     return json.dumps(return_list)
 
