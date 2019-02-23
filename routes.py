@@ -56,11 +56,17 @@ def load_ajax():
     name = request.get_json()
     returnData = db.session.query(gs).filter(gs.subjectName == name).all()
 
-    return_set = set()
+    return_list = list()
     for r in returnData:
-        return_set.add(r.courseID)
+        return_list.append(r.courseID)
 
-    return json.dumps(sorted(return_set))
+    return_list = list(dict.fromkeys(return_list))
+    # return_set = set()
+    # for r in returnData:
+    #     return_set.add(r.courseID)
+
+
+    return json.dumps(return_list)
 
 
 @app.route('/load_ajax2', methods=["GET", "POST"])
