@@ -1,19 +1,19 @@
+import os
 import json
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://jxxblesrascyio:a447ed84172575a035b9fa57af3f819f0c1163fe46da6c3469f110293e0412f1@ec2-54-243-223-245.compute-1.amazonaws.com:5432/d37d890uhbs9gv'
-#app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
 class gs(db.Model):
 
-    __tablename__= "GOLDtable"
+    __tablename__= "spring2019table"
 
     id = db.Column(db.Integer, primary_key=True)
     subjectName = db.Column(db.String(100), unique=False)
