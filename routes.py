@@ -6,7 +6,8 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://jxxblesrascyio:a447ed84172575a035b9fa57af3f819f0c1163fe46da6c3469f110293e0412f1@ec2-54-243-223-245.compute-1.amazonaws.com:5432/d37d890uhbs9gv'
+#app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -61,10 +62,6 @@ def load_ajax():
         return_list.append(r.courseID)
 
     return_list = list(dict.fromkeys(return_list))
-    # return_set = set()
-    # for r in returnData:
-    #     return_set.add(r.courseID)
-
 
     return json.dumps(return_list)
 
@@ -101,13 +98,11 @@ def load_ajax2():
 @app.route('/load_ajax3', methods=["GET", "POST"])
 def load_ajax3():
     proAndTimes = request.get_json()
-    print(proAndTimes)
     prof, day, time = proAndTimes.split('~')
     returnData = db.session.query(gs).filter((gs.proName == prof) & (gs.times == time)).limit(1).all()
 
     classId = returnData[0].id
     classId += 1
-    print("classId: ", classId)
 
     sectionTime_list = list()
     sectionDay_list = list()
