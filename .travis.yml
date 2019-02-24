@@ -7,4 +7,4 @@ install:
   - pip install -r repuirements.txt
 
 script:
-  - "python routs.py test"
+  - "python routes.py test"
