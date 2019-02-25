@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/ucsb-cs48-w19/4pm-gold-scheduler.svg?branch=K1n9sley-heroku)](https://travis-ci.org/ucsb-cs48-w19/4pm-gold-scheduler)
 # Project Gold Scheduler
-[GS](https://protected-depths-20813.herokuapp.com)
+[Link to Gold Scheduler](https://protected-depths-20813.herokuapp.com)
 ## Project summary
 Gold Scheduler helps UCSB students plan their upcomming quarter by making easier for them to visualize multiple potential schedules. It uses a calandar-like view with multiple windows, each window is a schedule. The user can select the classes available for the quarter selected and filter out classes just like in GOLD. From there they can drag the class into the calandar, have its lecture and section times displayed, any potential conflicts are highlighted and can be easily resolved.  
 
@@ -20,7 +20,7 @@ The user can make their multiple schedules on one page. Easy for them to registe
 ## Installation
 1. Fork the repo
 2. Install [pip](https://pip.pypa.io/en/latest/installing/)
-3. Install PostgreSQL on your machine: [Mac](https://postgresapp.com/) [Windows](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows)
+3. Install PostgreSQL on your machine: [Mac](https://postgresapp.com/) | [Windows](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads#windows)
 4. Install virtual environment:  `$ pip install virtualenv`
 5. Under your project file: `$ virtualenv venv`
 6. Active virtualenv: `$ source venv/bin/activate`
@@ -34,6 +34,8 @@ Select the classes from the class box, add them to the weekly calendar with the 
 1. Leaving page does not save calendar
 2. Adding the same class again will result in a conflict
 3. Cannot remove classes from calendar once added
+4. Text for classes close on calendar might have text overlapping each other
+5. Class info text is not relative to screen size. Changing browser window size will put text outside block
 
 ## Contributing
 1. Fork it!

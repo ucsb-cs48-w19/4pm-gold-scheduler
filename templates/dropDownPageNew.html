@@ -2,8 +2,11 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>TestingDropdown</title>
+	<title>Time Table</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="../static/js/addSubject.js"></script>
+    <script src="../static/js/addColor.js"></script>
+    <script src="../static/js/addClass.js"></script>
 </head>
 <body onload="addSubject()">
 
@@ -22,10 +25,15 @@
     <select id="section">
 		<option value="0">--Please Choose--</option>
 	</select>
-
-    <button type="button" onclick = "finalSplite()">Click Me!</button>
-    <button type="button" onclick = "ConvertTimeformat('4:30 PM')">Click Me2!</button>
     <button type="button" onclick = "addClass()">addClass</button>
+
+    </br>
+
+    <select id="classOn">
+		<option value="0">Your class will be here!</option>
+	</select>
+
+    <button type="button" onclick = "DropClass()">Drop it!</button>
 
 
     <script type="text/javascript">
@@ -41,21 +49,21 @@
 			for (var r = 0; r < rows; r++){
 				if(r == 0) {
 					table += '<tr>';
-					table += '<th height = "50" colspan="6" id = "title">' +  'Time Table' + '</th>';
+					table += '<th height = "60" colspan="6" id = "title">' +  'Time Table' + '</th>';
 					// table += '<th colspan= "6">' + Time Table + '</th>';
 					table += '</tr>';
 
 				} else if(r == 1) {
 					table += '<tr>';
 					for (var c = 0; c < cols; c++) {
-						table += '<th width ="100" height = "50" id='+ weekDays[c] + '>' + weekDays[c] + '</th>';
+						table += '<th width ="60" height = "60" id='+ weekDays[c] + '>' + weekDays[c] + '</th>';
 					}
 					table += '</tr>';
 				} else if(r == 2){
 					table += '<tr>';
 						for(var c = 0; c < cols; c++) {
 							if(c==0) {
-								table += '<td height = "50">' + time[index] +'</td>';
+								table += '<td height = "60">' + time[index] +'</td>';
 								index++;
 							} else {
 								table += '<td rowspan="16" id='+ weekDays[c] + 'T' +'>' + nestedTable() +'</td>';
@@ -64,7 +72,7 @@
 					table += '</tr>';
 				} else {
 					table += '<tr>';
-						table += '<td height = "50">' + time[index] +'</td>';
+						table += '<td height = "60">' + time[index] +'</td>';
 								index++;
 					table += '</tr>';
 				}
@@ -87,7 +95,7 @@
 			var row = 192;
 			nestedTable += '<table border=0 cellspacing="0" style="width: 100%; height: 100%;">';
 			for(var r = 0; r < row; r++) {
-				nestedTable += '<tr>' + '<td>' + '</td>' + '</tr>'
+				nestedTable += '<tr>' + '<td heigh = "9">' + '</td>' + '</tr>'
 			}
 			nestedTable += '</table>';
 			return nestedTable;
@@ -115,39 +123,7 @@
 
 		var a = 0;
 
-		function addColor(className, string, color) {
-			var startCell = timeSplit(string)[0];
-			var numOfCells = timeSplit(string)[1];
-			var day = timeSplit(string)[2]
-			for(var i = 0; i < numOfCells; i ++) {
-				if(!(document.getElementById(day + 'T').getElementsByTagName('td')[i + startCell].style.backgroundColor)){
-					document.getElementById(day + 'T').getElementsByTagName('td')[i + startCell].style.backgroundColor = color;
-				} else {
-					document.getElementById(day + 'T').getElementsByTagName('td')[i + startCell].style.backgroundColor = "red";
-				}
 
-			}
-			var element = document.getElementById(day + 'T').getElementsByTagName('td')[startCell];
-			var position = element.getBoundingClientRect();
-			var x = position.left;
-			var y = position.top;
-			var body1 = document.getElementsByTagName("BODY")[0];
-			var div1 = document.createElement('div');
-			var text1 = document.createTextNode(className);
-			var text2 = document.createTextNode(string);
-
-			div1.style.position = 'absolute';
-
-			div1.appendChild(text1);
-			var br=document.createElement("BR");
-			div1.appendChild(br);
-			div1.appendChild(text2);
-            body1.appendChild(div1);
-            div1.style.left = x + "px";
-            div1.style.top = y + "px";
-
-
-		}
 
 		var time1 = "Thr1530-1645";
 		var time2 = "Wed1530-1645";
@@ -163,7 +139,12 @@
 </body>
 
 	<script type="text/javascript">
+<<<<<<< HEAD
         var color =["","Lavender", "MistyRose", "lightgrey", "lightblue", "LightCoral", "LightSkyBlue"];
+=======
+        var classArr = [];
+        var color =["","lightblue", "yellow", "lightgrey", "blue", "orange", "green"];
+>>>>>>> 7673ca2e3f5136447244d98e42e9376518fca069
 
 
 
@@ -171,19 +152,6 @@
 
 
 		var subjectArr = {{ displayData|tojson }};
-		function addSubject() {
-			var subject1 = document.getElementById("subject");
-			for(var j = 0; j<subjectArr.length; j++)
-					{
-						var value1 = subjectArr[j];
-						var option1 = document.createElement("option");
-						var text1 = document.createTextNode(value1);
-						option1.appendChild(text1);
-						subject1.appendChild(option1);
-					}
-		}
-
-
 
 
 
@@ -363,158 +331,142 @@
 
 
         function finalSplite() {
-		    var sub = document.getElementById("subject").value;
+            var sub = document.getElementById("subject").value;
             var classValue = document.getElementById("class1").value;
             var lecValue = document.getElementById("teacherLecTime").value;
             var sectionValue = document.getElementById("section").value;
 
             var finalData = classValue + "~" + lecValue + "~" + sectionValue;
 
-            if(finalData == "0~0~0") {
+            if (finalData == "0~0~0") {
                 return "";
             } else {
 
-            var proName = lecValue.slice(0,lecValue.search("~"));
-            var lecValue = lecValue.substr(lecValue.search("~")+1)
-            var date = [];
-            var i=0;
-            while(lecValue[0]!="~")
-            {
-                var dateholder
-                if(lecValue[0]=="M")
-                {
-                    dateholder = "Mon";
-                    date.push(dateholder);
-                }
-                else if(lecValue[0]=="T")
-                {
-                    dateholder = "Tue";
-                    date.push(dateholder);
-                }
-
-                else if(lecValue[0]=="W")
-                {
-                    dateholder = "Wed";
-                    date.push(dateholder);
-                }
-
-                else if(lecValue[0]=="R")
-                {
-                    dateholder = "Thr";
-                    date.push(dateholder);
-                }
-
-                else if (lecValue[0]=="F")
-                {
-                    dateholder = "Fri"
-                    date.push(dateholder);
-                }
-                i+=1;
-                lecValue = lecValue.substr(1);
-            }
-            lecValue = lecValue.substr(1);
-            var LecStartTime="";
-            var LecEndTime = "";
-            while(lecValue[0]!="-")
-            {
-                if(lecValue[0]==" ")
-                    ;
-                else
-                {
-                    LecStartTime+=lecValue[0];
-                }
-                lecValue = lecValue.substr(1);
-            }
-           LecStartTime = ConvertTimeformat(LecStartTime);
-            lecValue = lecValue.substr(1);
-            while(lecValue[0]!="m")
-            {
-                if(lecValue[0]==" ")
-                    ;
-                else
-                {
-                    LecEndTime+=lecValue[0];
-                }
-                lecValue = lecValue.substr(1);
-            }
-            LecEndTime+="m";
-            LecEndTime = ConvertTimeformat(LecEndTime);
-            var LecTimeFinal=[]
-            var i;
-            for (i = 0; i < date.length; i++) {
-             LecTimeFinal.push(date[i]+LecStartTime+"-"+LecEndTime);
-            }
-            var bigFinal=[];
-            bigFinal.push(classValue);
-            var i;
-            for (i = 0; i < LecTimeFinal.length; i++)
-            {
-               bigFinal.push(LecTimeFinal[i])
-            }
-            var secdate = [];
-            if(sectionValue!="") {
-                while (sectionValue[0] != "~") {
+                var proName = lecValue.slice(0, lecValue.search("~"));
+                var lecValue = lecValue.substr(lecValue.search("~") + 1)
+                var date = [];
+                var i = 0;
+                while (lecValue[0] != "~") {
                     var dateholder
-                    if (sectionValue[0] == "M") {
+                    if (lecValue[0] == "M") {
                         dateholder = "Mon";
-                        secdate.push(dateholder);
-                    } else if (sectionValue[0] == "T") {
+                        date.push(dateholder);
+                    } else if (lecValue[0] == "T") {
                         dateholder = "Tue";
-                        secdate.push(dateholder);
-                    } else if (sectionValue[0] == "W") {
+                        date.push(dateholder);
+                    } else if (lecValue[0] == "W") {
                         dateholder = "Wed";
-                        secdate.push(dateholder);
-                    } else if (sectionValue[0] == "R") {
+                        date.push(dateholder);
+                    } else if (lecValue[0] == "R") {
                         dateholder = "Thr";
-                        secdate.push(dateholder);
-                    } else if (sectionValue[0] == "F") {
+                        date.push(dateholder);
+                    } else if (lecValue[0] == "F") {
                         dateholder = "Fri"
-                        secdate.push(dateholder);
+                        date.push(dateholder);
                     }
                     i += 1;
+                    lecValue = lecValue.substr(1);
+                }
+                lecValue = lecValue.substr(1);
+                var LecStartTime = "";
+                var LecEndTime = "";
+                while (lecValue[0] != "-") {
+                    if (lecValue[0] == " ")
+                        ;
+                    else {
+                        LecStartTime += lecValue[0];
+                    }
+                    lecValue = lecValue.substr(1);
+                }
+                LecStartTime = ConvertTimeformat(LecStartTime);
+                lecValue = lecValue.substr(1);
+                while (lecValue[0] != "m") {
+                    if (lecValue[0] == " ")
+                        ;
+                    else {
+                        LecEndTime += lecValue[0];
+                    }
+                    lecValue = lecValue.substr(1);
+                }
+                LecEndTime += "m";
+                LecEndTime = ConvertTimeformat(LecEndTime);
+                var LecTimeFinal = []
+                var i;
+                for (i = 0; i < date.length; i++) {
+                    LecTimeFinal.push(date[i] + LecStartTime + "-" + LecEndTime);
+                }
+                var bigFinal = [];
+                bigFinal.push(classValue);
+                var i;
+                for (i = 0; i < LecTimeFinal.length; i++) {
+                    bigFinal.push(LecTimeFinal[i])
+                }
+                var secdate = [];
+                if (sectionValue != "") {
+                    while (sectionValue[0] != "~") {
+                        var dateholder
+                        if (sectionValue[0] == "M") {
+                            dateholder = "Mon";
+                            secdate.push(dateholder);
+                        } else if (sectionValue[0] == "T") {
+                            dateholder = "Tue";
+                            secdate.push(dateholder);
+                        } else if (sectionValue[0] == "W") {
+                            dateholder = "Wed";
+                            secdate.push(dateholder);
+                        } else if (sectionValue[0] == "R") {
+                            dateholder = "Thr";
+                            secdate.push(dateholder);
+                        } else if (sectionValue[0] == "F") {
+                            dateholder = "Fri"
+                            secdate.push(dateholder);
+                        }
+                        i += 1;
+                        sectionValue = sectionValue.substr(1);
+                    }
+
                     sectionValue = sectionValue.substr(1);
+                    var secStartTime = "";
+                    var secEndTime = "";
+                    while (sectionValue[0] != "-") {
+                        if (sectionValue[0] == " ")
+                            ;
+                        else {
+                            secStartTime += sectionValue[0];
+                        }
+                        sectionValue = sectionValue.substr(1);
+                    }
+                    secStartTime = ConvertTimeformat(secStartTime);
+                    sectionValue = sectionValue.substr(1);
+                    while (sectionValue[0] != "m") {
+                        if (sectionValue[0] == " ")
+                            ;
+                        else {
+                            secEndTime += sectionValue[0];
+                        }
+                        sectionValue = sectionValue.substr(1);
+                    }
+                    secEndTime += "m";
+                    secEndTime = ConvertTimeformat(secEndTime);
+                    var secTimeFinal = []
+                    var i;
+                    for (i = 0; i < secdate.length; i++) {
+                        secTimeFinal.push(secdate[i] + secStartTime + "-" + secEndTime);
+                    }
+
                 }
 
-                sectionValue = sectionValue.substr(1);
-                var secStartTime = "";
-                var secEndTime = "";
-                while (sectionValue[0] != "-") {
-                    if (sectionValue[0] == " ")
-                        ;
-                    else {
-                        secStartTime += sectionValue[0];
-                    }
-                    sectionValue = sectionValue.substr(1);
-                }
-                secStartTime = ConvertTimeformat(secStartTime);
-                sectionValue = sectionValue.substr(1);
-                while (sectionValue[0] != "m") {
-                    if (sectionValue[0] == " ")
-                        ;
-                    else {
-                        secEndTime += sectionValue[0];
-                    }
-                    sectionValue = sectionValue.substr(1);
-                }
-                secEndTime += "m";
-                secEndTime = ConvertTimeformat(secEndTime);
-                var secTimeFinal = []
                 var i;
                 for (i = 0; i < secdate.length; i++) {
-                    secTimeFinal.push(secdate[i] + secStartTime + "-" + secEndTime);
+                    bigFinal.push(secTimeFinal[i])
                 }
+                //alert(bigFinal);
+                return bigFinal;
 
             }
-
-            var i;
-            for (i = 0; i < secdate.length; i++)
-            {
-               bigFinal.push(secTimeFinal[i])
-            }
-            //alert(bigFinal);
-            return bigFinal;
-
         }
+
+
 
         function ConvertTimeformat(str) {
             var time = str;
@@ -529,21 +481,192 @@
             if (minutes < 10) sMinutes = "0" + sMinutes;
             return sHours + sMinutes;
         }
-        }
+
 
         var colorIndex = 1;
-        function addClass() {
-		    var data = finalSplite();
-		    if(data == "") {
-		        alert("Please choose a course! Or go home!");
-            } else {
-		        var className = data[0];
-		        for(var i = 1; i < data.length; i ++) {
-		        addColor(data[0], data[i], color[colorIndex]);
+
+
+        function DropClass() {
+
+            var element = document.getElementsByTagName("Table");
+            var x = document.getElementsByTagName("BODY")[0];
+            element.x.removeChild(element);
+
+            var className = document.getElementById("classOn").value;
+            var classIndex = 0;
+            for (var i = 0; i < classArr.length; i ++) {
+                if(className == classArr[i]) {
+                    classArr.splice(i, 1);
+                }
             }
-            }
-		    colorIndex++;
+
+            var arr1 = classArr;
+
+
+		    var classOn = document.getElementById("classOn");
+
+
+			    var options1 = classOn.getElementsByTagName("option");
+			for(var m = 0; m<options1.length; m++)
+			{
+				var op = options1[m];
+				classOn.removeChild(op);
+				m--;
+			}
+
+			    for(var j = 0; j<arr1.length; j++)
+					{
+						var value1 = arr1[j];
+						var option1 = document.createElement("option");
+						var text1 = document.createTextNode(value1);
+						option1.appendChild(text1);
+						classOn.appendChild(option1);
+					}
+
+			    for(var i = 0; i < classArr.length; i++) {
+			        var class2 = classArr[i].split("*");
+                    var class3 = splitClass(class2);
+
+                }
         }
+
+
+        function splitClass(arr) {
+            //var sub = document.getElementById("subject").value;
+            var classValue = arr[0];
+            var lecValue = arr[1];
+            var sectionValue = arr[2];
+
+            var finalData = classValue + "~" + lecValue + "~" + sectionValue;
+
+            if (finalData == "0~0~0") {
+                return "";
+            } else {
+
+                var proName = lecValue.slice(0, lecValue.search("~"));
+                var lecValue = lecValue.substr(lecValue.search("~") + 1)
+                var date = [];
+                var i = 0;
+                while (lecValue[0] != "~") {
+                    var dateholder
+                    if (lecValue[0] == "M") {
+                        dateholder = "Mon";
+                        date.push(dateholder);
+                    } else if (lecValue[0] == "T") {
+                        dateholder = "Tue";
+                        date.push(dateholder);
+                    } else if (lecValue[0] == "W") {
+                        dateholder = "Wed";
+                        date.push(dateholder);
+                    } else if (lecValue[0] == "R") {
+                        dateholder = "Thr";
+                        date.push(dateholder);
+                    } else if (lecValue[0] == "F") {
+                        dateholder = "Fri"
+                        date.push(dateholder);
+                    }
+                    i += 1;
+                    lecValue = lecValue.substr(1);
+                }
+                lecValue = lecValue.substr(1);
+                var LecStartTime = "";
+                var LecEndTime = "";
+                while (lecValue[0] != "-") {
+                    if (lecValue[0] == " ")
+                        ;
+                    else {
+                        LecStartTime += lecValue[0];
+                    }
+                    lecValue = lecValue.substr(1);
+                }
+                LecStartTime = ConvertTimeformat(LecStartTime);
+                lecValue = lecValue.substr(1);
+                while (lecValue[0] != "m") {
+                    if (lecValue[0] == " ")
+                        ;
+                    else {
+                        LecEndTime += lecValue[0];
+                    }
+                    lecValue = lecValue.substr(1);
+                }
+                LecEndTime += "m";
+                LecEndTime = ConvertTimeformat(LecEndTime);
+                var LecTimeFinal = []
+                var i;
+                for (i = 0; i < date.length; i++) {
+                    LecTimeFinal.push(date[i] + LecStartTime + "-" + LecEndTime);
+                }
+                var bigFinalData = [];
+                bigFinalData.push(classValue);
+                var i;
+                for (i = 0; i < LecTimeFinal.length; i++) {
+                    bigFinalData.push(LecTimeFinal[i])
+                }
+                var secdate = [];
+                if (sectionValue != "") {
+                    while (sectionValue[0] != "~") {
+                        var dateholder
+                        if (sectionValue[0] == "M") {
+                            dateholder = "Mon";
+                            secdate.push(dateholder);
+                        } else if (sectionValue[0] == "T") {
+                            dateholder = "Tue";
+                            secdate.push(dateholder);
+                        } else if (sectionValue[0] == "W") {
+                            dateholder = "Wed";
+                            secdate.push(dateholder);
+                        } else if (sectionValue[0] == "R") {
+                            dateholder = "Thr";
+                            secdate.push(dateholder);
+                        } else if (sectionValue[0] == "F") {
+                            dateholder = "Fri"
+                            secdate.push(dateholder);
+                        }
+                        i += 1;
+                        sectionValue = sectionValue.substr(1);
+                    }
+
+                    sectionValue = sectionValue.substr(1);
+                    var secStartTime = "";
+                    var secEndTime = "";
+                    while (sectionValue[0] != "-") {
+                        if (sectionValue[0] == " ")
+                            ;
+                        else {
+                            secStartTime += sectionValue[0];
+                        }
+                        sectionValue = sectionValue.substr(1);
+                    }
+                    secStartTime = ConvertTimeformat(secStartTime);
+                    sectionValue = sectionValue.substr(1);
+                    while (sectionValue[0] != "m") {
+                        if (sectionValue[0] == " ")
+                            ;
+                        else {
+                            secEndTime += sectionValue[0];
+                        }
+                        sectionValue = sectionValue.substr(1);
+                    }
+                    secEndTime += "m";
+                    secEndTime = ConvertTimeformat(secEndTime);
+                    var secTimeFinal = []
+                    var i;
+                    for (i = 0; i < secdate.length; i++) {
+                        secTimeFinal.push(secdate[i] + secStartTime + "-" + secEndTime);
+                    }
+
+                }
+
+                var i;
+                for (i = 0; i < secdate.length; i++) {
+                    bigFinalData.push(secTimeFinal[i])
+                }
+                alert(bigFinalData);
+                return bigFinalData;
+            }
+        }
+
+
 
 	</script>
 </html>
