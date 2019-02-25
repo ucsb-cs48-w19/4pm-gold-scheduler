@@ -1,8 +1,8 @@
-[![Build Status](https://travis-ci.org/ucsb-cs48-w19/4pm-gold-scheduler.svg?branch=K1n9sley-heroku)](https://travis-ci.org/ucsb-cs48-w19/4pm-gold-scheduler)
+Travis-CI status on Master Branch:  [![Build Status](https://travis-ci.org/ucsb-cs48-w19/4pm-gold-scheduler.svg?branch=K1n9sley-heroku)](https://travis-ci.org/ucsb-cs48-w19/4pm-gold-scheduler)
 # Project Gold Scheduler
 [Link to Gold Scheduler](https://protected-depths-20813.herokuapp.com)
 ## Project summary
-Gold Scheduler helps UCSB students plan their upcomming quarter by making easier for them to visualize multiple potential schedules. It uses a calandar-like view with multiple windows, each window is a schedule. The user can select the classes available for the quarter selected and filter out classes just like in GOLD. From there they can drag the class into the calandar, have its lecture and section times displayed, any potential conflicts are highlighted and can be easily resolved.  
+Gold Scheduler helps UCSB students plan their upcomming quarter by making easier for them to visualize multiple potential schedules. User can use dropdown bottom to choose the classes and sections directly. Also, they can select the classes available for the quarter selected and delete class just like in GOLD. The calendar will show them the conflict of classes, so they can manage the scheduler by themselves easily.
 
 ### One-sentence description of the project
 A webapp for UCSB students to help them plan their fututre quarter schedules
@@ -27,15 +27,18 @@ The user can make their multiple schedules on one page. Easy for them to registe
 7. Install requirements from requirements.txt: `$ pip install -r requirements.txt`
 
 ## Functionality
-Select the classes from the class box, add them to the weekly calendar with the click of a button and have all class info and potential conflicts displayed on the page.
-
+1. User open the link above.
+2. Read the page of introduction, and click the link to get start.
+3. Use dropdown boxes to find the class they need.
+4. Click add class to add class to the schedule
+5. Delete or continue add classes. The calendar may show them the note if the confliction happens.
+6. Use "Plus" bottom to add more schedules.
 
 ## Known Problems
-1. Leaving page does not save calendar
-2. Adding the same class again will result in a conflict
-3. Cannot remove classes from calendar once added
-4. Text for classes close on calendar might have text overlapping each other
-5. Class info text is not relative to screen size. Changing browser window size will put text outside block
+1. Add delete process
+2. Add more than one schedule
+3. Time conflict formate updating
+4. schedule match time
 
 ## Contributing
 1. Fork it!
@@ -43,3 +46,10 @@ Select the classes from the class box, add them to the weekly calendar with the 
 3. Commit your changes: `git commit -am 'Add some feature'`
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request :D
+
+
+## License
+If you haven't already, add a file called LICENSE.txt with the text of the appropriate license. We recommend using the MIT license: https://choosealicense.com/licenses/mit/
+
+The Value Exchange: users are happy with the result
+
