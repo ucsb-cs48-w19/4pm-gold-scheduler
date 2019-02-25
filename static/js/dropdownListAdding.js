@@ -1,6 +1,5 @@
-
-
-// add subject into subject dropdown list(first list)
+// dropdownListAdding.js
+// add subject into subject first dropdown list(subject)
 function addSubject() {
 	var subject1 = document.getElementById("subject");
 	for(var j = 0; j<subjectArr.length; j++) {
@@ -12,7 +11,7 @@ function addSubject() {
 	}
 }
 
-// add courses into second dropdown list
+// add courses into second dropdown list(courseID)
 function postSubject(val) {
 	var val1 = val;
 	//alert(val1);
@@ -48,7 +47,7 @@ function postSubject(val) {
 	});
 }
 
-// add classes into third dropdown list
+// add classes into third dropdown list(classes)
 function postLectTime(val) {
 	$.ajax({
 		type : "POST",
@@ -79,7 +78,7 @@ function postLectTime(val) {
 	});
 }
 
-// add sections into fo
+// add sections into forth dropdown list(section)
 function postSubClass(class1) {
 	$.ajax({
 		type : "POST",
@@ -114,7 +113,8 @@ function postSubClass(class1) {
 	});
 }
 
-// and put the clsses(user picked) into user class dropdown list
+// add classes into weekly schedule table
+// also add classes into fifth dropdown list(user classeslist)
 function addClass() {
 
 	var sub = document.getElementById("subject").value;
