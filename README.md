@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/ucsb-cs48-w19/4pm-gold-scheduler.svg?branch=K1n9sley-heroku)](https://travis-ci.org/ucsb-cs48-w19/4pm-gold-scheduler)
 # Project Gold Scheduler
 [Link to Gold Scheduler](https://protected-depths-20813.herokuapp.com)
 ## Project summary

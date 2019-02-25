@@ -4,9 +4,8 @@
 	<meta charset="UTF-8">
 	<title>Time Table</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    <script src="../static/js/addSubject.js"></script>
     <script src="../static/js/addColor.js"></script>
-    <script src="../static/js/addClass.js"></script>
+    <script src="../static/js/dropdownListAdding.js"></script>
 </head>
 <body onload="addSubject()">
 
@@ -79,14 +78,6 @@
 			}
 
 			document.write('<table border=1 bordercolor="lightgray" cellspacing="0" style="width: 100%; height: 100%;">' + table + '</table>');
-			// document.getElementById("Fri22:00").style.backgroundColor = "blue";
-			// for(var i = 0; i < 6; i ++) {
-			// 	document.getElementById('Wed3:00pm').getElementsByTagName('td')[i + 6].style.backgroundColor = "lightblue";
-			// }
-			// for(var i = 0; i < 9; i ++) {
-			// 	document.getElementById('Wed4:00pm').getElementsByTagName('td')[i].style.backgroundColor = "lightblue";
-			// }
-
 
 		}
 
@@ -139,14 +130,8 @@
 </body>
 
 	<script type="text/javascript">
-        var classArr = [];
-        var color =["","lightblue", "yellow", "lightgrey", "blue", "orange", "green"];
 
-
-
-
-
-
+        var color =["","Lavender", "MistyRose", "lightgrey", "lightblue", "LightCoral", "LightSkyBlue"];
 		var subjectArr = {{ displayData|tojson }};
 
 
@@ -154,146 +139,8 @@
 
 
 
-		    //$.post("/load_ajax", {
-		      // data: JSON.stringify("world"),
-            //}, function(data, status) {
-		      //  alert(data);
-            //});
-        function postSubject(val) {
-		    var val1 = val;
-            //alert(val1);
-		    $.ajax({
-            type : "POST",
-            url : "/load_ajax",
-            data: JSON.stringify(val1, null, '\t'),
-            contentType: 'application/json;charset=UTF-8',
-            success: function(result) {
 
 
-
-
-
-                //alert(result);
-                //var ini = ["--Please Choose--"];
-                var arr1 = clearData(result);
-                //var arr1 = ini.concat(arr2);
-
-
-			    var class1 = document.getElementById("class1");
-
-
-			    var options1 = class1.getElementsByTagName("option");
-			for(var m = 0; m<options1.length; m++)
-			{
-				var op = options1[m];
-				class1.removeChild(op);
-				m--;
-			}
-
-			    for(var j = 0; j<arr1.length; j++)
-					{
-						var value1 = arr1[j];
-						var option1 = document.createElement("option");
-						var text1 = document.createTextNode(value1);
-						option1.appendChild(text1);
-						class1.appendChild(option1);
-					}
-
-
-			    var classValue = arr1[0];
-                postSubClass(classValue);
-
-
-
-            }
-        });
-        }
-
-
-        function postSubClass(class1) {
-		    $.ajax({
-            type : "POST",
-            url : "/load_ajax2",
-            data: JSON.stringify(class1, null, '\t'),
-            contentType: 'application/json;charset=UTF-8',
-            success: function(result) {
-
-                //alert(result);
-                //var ini = ["--Please Choose--"];
-                var arr1 = clearData(result);
-                //var arr1 = ini.concat(arr1);
-
-                //alert(arr1);
-
-			    var teacherLecTime = document.getElementById("teacherLecTime");
-
-
-			    var options1 = teacherLecTime.getElementsByTagName("option");
-			for(var m = 0; m<options1.length; m++)
-			{
-				var op = options1[m];
-				teacherLecTime.removeChild(op);
-				m--;
-			}
-
-			    for(var j = 0; j<arr1.length; j++)
-					{
-						var value1 = arr1[j];
-						var option1 = document.createElement("option");
-						var text1 = document.createTextNode(value1);
-						option1.appendChild(text1);
-						teacherLecTime.appendChild(option1);
-					}
-
-
-			    var lecValue = arr1[0];
-                postLectTime(lecValue);
-
-
-            }
-        });
-        }
-
-
-        function postLectTime(val) {
-		    $.ajax({
-            type : "POST",
-            url : "/load_ajax3",
-            data: JSON.stringify(val, null, '\t'),
-            contentType: 'application/json;charset=UTF-8',
-            success: function(result) {
-
-                //alert(result);
-                //var ini = ["--Please Choose--"];
-                var arr1 = clearData(result);
-                //var arr1 = ini.concat(arr2);
-
-
-
-			    var section = document.getElementById("section");
-
-
-			    var options1 = section.getElementsByTagName("option");
-			for(var m = 0; m<options1.length; m++)
-			{
-				var op = options1[m];
-				section.removeChild(op);
-				m--;
-			}
-
-			    for(var j = 0; j<arr1.length; j++)
-					{
-						var value1 = arr1[j];
-						var option1 = document.createElement("option");
-						var text1 = document.createTextNode(value1);
-						option1.appendChild(text1);
-						section.appendChild(option1);
-					}
-
-
-            }
-        });
-        }
 
 
 
@@ -301,13 +148,6 @@
 		    var classValue = document.getElementById("class1").value;
 		    alert(classValue);
         }
-
-
-
-
-
-
-
 
 		function clearData (string) {
             var s1 = string.substring(1);
@@ -321,9 +161,6 @@
             }
             return goodData;
         }
-
-
-
 
 
         function finalSplite() {
