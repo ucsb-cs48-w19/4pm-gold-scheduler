@@ -49,7 +49,7 @@ def dropDownPageNew():
     for r in datas:
         subject_set.add(r.subjectName)
 
-    return render_template('dropDownPageNew.html', displayData=list(sorted(subject_set)))
+    return render_template('scheduleMaker.html', displayData=list(sorted(subject_set)))
 
 
 @app.route('/load_ajax', methods=["GET", "POST"])
