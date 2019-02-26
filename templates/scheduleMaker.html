@@ -6,133 +6,146 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="../static/js/addColor.js"></script>
     <script src="../static/js/dropdownListAdding.js"></script>
+    <link href="{{ url_for('static', filename='css/mainSelect.css') }}" type="text/css" rel="stylesheet">
 </head>
 <body onload="addSubject()">
 
-	<select id="subject" onchange="postSubject(this.value) ">
-		<option value="0">--Please Choose--</option>
-	</select>
+    <header>
 
-	<select id="class1" onchange="postSubClass(this.value)">
-		<option value="0">--Please Choose--</option>
-	</select>
+    <div class="custom-select">
+    
+    <label>Subject:  <select id="subject" onchange="postSubject(this.value) ">
+        <option value="0">--Please Choose--</option>
+    </select>
+    </label>
 
-	<select id="teacherLecTime" onchange="postLectTime(this.value)">
-		<option value="0">--Please Choose--</option>
-	</select>
+    <label>Class:<select id="class1" onchange="postSubClass(this.value)">
+        <option value="0">--Please Choose--</option>
+    </select>
+    </label>
 
-    <select id="section">
-		<option value="0">--Please Choose--</option>
-	</select>
-    <button type="button" onclick = "addClass()">addClass</button>
+    <label>Lecture:  <select id="teacherLecTime" onchange="postLectTime(this.value)">
+        <option value="0">--Please Choose--</option>
+    </select>
+    </label>
+
+    <label>Section:  <select id="section">
+        <option value="0">--Please Choose--</option>
+    </select>
+    </label>
+    <button class="button" style="vertical-align:middle" onclick = "addClass()"><span>addClass</span></button>
 
     </br>
 
-    <select id="classOn">
-		<option value="0">Your class will be here!</option>
-	</select>
+    <label>Your Class:  <select id="classOn">
+        <option value="0">Your class will be here!</option>
+    </select>
+    </label>
+  
 
-    <button type="button" onclick = "DropClass()">Drop it!</button>
+    <button class="button" style="vertical-align:middle" onclick = "DropClass()"><span>Drop it!</span></button>
+    </div>
 
+    </header>
 
     <script type="text/javascript">
     function table() {
-			var weekDays = ["", "Mon", "Tue", "Wed", "Thr", "Fri"];
-			var time = ["7:00am", "8:00am", "9:00am", "10:00am", "11:00am", "12:00pm",
-			"1:00pm", "2:00pm", "3:00pm", "4:00pm", "5:00pm", "6:00pm", "7:00pm", "8:00pm",
-			"9:00pm", "10:00pm"];
-			var index = 0;
-			var table = '';
-			var rows = 18;
-			var cols = 6;
-			for (var r = 0; r < rows; r++){
-				if(r == 0) {
-					table += '<tr>';
-					table += '<th height = "60" colspan="6" id = "title">' +  'Time Table' + '</th>';
-					// table += '<th colspan= "6">' + Time Table + '</th>';
-					table += '</tr>';
+            var weekDays = ["", "Mon", "Tue", "Wed", "Thr", "Fri"];
+            var time = ["7:00am", "8:00am", "9:00am", "10:00am", "11:00am", "12:00pm",
+            "1:00pm", "2:00pm", "3:00pm", "4:00pm", "5:00pm", "6:00pm", "7:00pm", "8:00pm",
+            "9:00pm", "10:00pm"];
+            var index = 0;
+            var table = '';
+            var rows = 18;
+            var cols = 6;
+            for (var r = 0; r < rows; r++){
+                if(r == 0) {
+                    table += '<tr>';
+                    table += '<th height = "60" colspan="6" id = "title">' +  'Time Table' + '</th>';
+                    // table += '<th colspan= "6">' + Time Table + '</th>';
+                    table += '</tr>';
 
-				} else if(r == 1) {
-					table += '<tr>';
-					for (var c = 0; c < cols; c++) {
-						table += '<th width ="60" height = "60" id='+ weekDays[c] + '>' + weekDays[c] + '</th>';
-					}
-					table += '</tr>';
-				} else if(r == 2){
-					table += '<tr>';
-						for(var c = 0; c < cols; c++) {
-							if(c==0) {
-								table += '<td height = "60">' + time[index] +'</td>';
-								index++;
-							} else {
-								table += '<td rowspan="16" id='+ weekDays[c] + 'T' +'>' + nestedTable() +'</td>';
-							}
-						}
-					table += '</tr>';
-				} else {
-					table += '<tr>';
-						table += '<td height = "60">' + time[index] +'</td>';
-								index++;
-					table += '</tr>';
-				}
-			}
+                } else if(r == 1) {
+                    table += '<tr>';
+                    for (var c = 0; c < cols; c++) {
+                        table += '<th width ="60" height = "60" id='+ weekDays[c] + '>' + weekDays[c] + '</th>';
+                    }
+                    table += '</tr>';
+                } else if(r == 2){
+                    table += '<tr>';
+                        for(var c = 0; c < cols; c++) {
+                            if(c==0) {
+                                table += '<td height = "60">' + time[index] +'</td>';
+                                index++;
+                            } else {
+                                table += '<td rowspan="16" id='+ weekDays[c] + 'T' +'>' + nestedTable() +'</td>';
+                            }
+                        }
+                    table += '</tr>';
+                } else {
+                    table += '<tr>';
+                        table += '<td height = "60">' + time[index] +'</td>';
+                                index++;
+                    table += '</tr>';
+                }
+            }
 
-			document.write('<table border=1 bordercolor="lightgray" cellspacing="0" style="width: 100%; height: 100%;">' + table + '</table>');
+            document.write('<table border=1 bordercolor="lightgray" cellspacing="0" style="width: 100%; height: 100%;">' + table + '</table>');
 
-		}
+        }
 
-		function nestedTable() {
-			var nestedTable = '';
-			var row = 192;
-			nestedTable += '<table border=0 cellspacing="0" style="width: 100%; height: 100%;">';
-			for(var r = 0; r < row; r++) {
-				nestedTable += '<tr>' + '<td heigh = "9">' + '</td>' + '</tr>'
-			}
-			nestedTable += '</table>';
-			return nestedTable;
-		}
-
-
-		function timeSplit(string) {
-			//MW2:00pm-3:15pm
-			// var string = "Mon1530-1645";
-			var day = string.substring(0, 3);
-			var time = string.substring(3);
-			var res = time.split("-");
-			var TimeS = res[0];
-			var TimeE = res[1];
-			var hourS = parseInt(TimeS.substring(0, 2), 10);
-			var minS = parseInt(TimeS.substring(2), 10);
-			var hourE = parseInt(TimeE.substring(0, 2), 10);
-			var minE = parseInt(TimeE.substring(2), 10);
-			var diffHour = hourE - hourS;
-			var diffMin = minE - minS;
-			var startCell = ((hourS-7)*12) + (minS/5);
-			var numOfCells = (diffHour*12) + (diffMin/5);
-			return [startCell, numOfCells, day];
-		}
-
-		var a = 0;
+        function nestedTable() {
+            var nestedTable = '';
+            var row = 192;
+            nestedTable += '<table border=0 cellspacing="0" style="width: 100%; height: 100%;">';
+            for(var r = 0; r < row; r++) {
+                nestedTable += '<tr>' + '<td heigh = "9">' + '</td>' + '</tr>'
+            }
+            nestedTable += '</table>';
+            return nestedTable;
+        }
 
 
+        function timeSplit(string) {
+            //MW2:00pm-3:15pm
+            // var string = "Mon1530-1645";
+            var day = string.substring(0, 3);
+            var time = string.substring(3);
+            var res = time.split("-");
+            var TimeS = res[0];
+            var TimeE = res[1];
+            var hourS = parseInt(TimeS.substring(0, 2), 10);
+            var minS = parseInt(TimeS.substring(2), 10);
+            var hourE = parseInt(TimeE.substring(0, 2), 10);
+            var minE = parseInt(TimeE.substring(2), 10);
+            var diffHour = hourE - hourS;
+            var diffMin = minE - minS;
+            var startCell = ((hourS-7)*12) + (minS/5);
+            var numOfCells = (diffHour*12) + (diffMin/5);
+            return [startCell, numOfCells, day];
+        }
 
-		var time1 = "Thr1530-1645";
-		var time2 = "Wed1530-1645";
-		var time3 = "Fri0900-0955";
-		var time4 = "Fri0800-1000";
-		table();
+        var a = 0;
 
-			 // document.getElementById('MonT').getElementsByTagName('td')[115].innerHTML = "Math";
+
+
+        var time1 = "Thr1530-1645";
+        var time2 = "Wed1530-1645";
+        var time3 = "Fri0900-0955";
+        var time4 = "Fri0800-1000";
+        table();
+
+             // document.getElementById('MonT').getElementsByTagName('td')[115].innerHTML = "Math";
 
 
         </script>
 
 </body>
 
-	<script type="text/javascript">
+    <script type="text/javascript">
 
         var color =["","Lavender", "MistyRose", "lightgrey", "lightblue", "LightCoral", "LightSkyBlue"];
-		var subjectArr = {{ displayData|tojson }};
+        var subjectArr = {{ displayData|tojson }};
 
 
 
@@ -144,12 +157,12 @@
 
 
 
-		function getValue() {
-		    var classValue = document.getElementById("class1").value;
-		    alert(classValue);
+        function getValue() {
+            var classValue = document.getElementById("class1").value;
+            alert(classValue);
         }
 
-		function clearData (string) {
+        function clearData (string) {
             var s1 = string.substring(1);
             var s2 = s1.substring(0, s1.length-1);
             var goodData = s2.split(",");
@@ -336,28 +349,28 @@
             var arr1 = classArr;
 
 
-		    var classOn = document.getElementById("classOn");
+            var classOn = document.getElementById("classOn");
 
 
-			    var options1 = classOn.getElementsByTagName("option");
-			for(var m = 0; m<options1.length; m++)
-			{
-				var op = options1[m];
-				classOn.removeChild(op);
-				m--;
-			}
+                var options1 = classOn.getElementsByTagName("option");
+            for(var m = 0; m<options1.length; m++)
+            {
+                var op = options1[m];
+                classOn.removeChild(op);
+                m--;
+            }
 
-			    for(var j = 0; j<arr1.length; j++)
-					{
-						var value1 = arr1[j];
-						var option1 = document.createElement("option");
-						var text1 = document.createTextNode(value1);
-						option1.appendChild(text1);
-						classOn.appendChild(option1);
-					}
+                for(var j = 0; j<arr1.length; j++)
+                    {
+                        var value1 = arr1[j];
+                        var option1 = document.createElement("option");
+                        var text1 = document.createTextNode(value1);
+                        option1.appendChild(text1);
+                        classOn.appendChild(option1);
+                    }
 
-			    for(var i = 0; i < classArr.length; i++) {
-			        var class2 = classArr[i].split("*");
+                for(var i = 0; i < classArr.length; i++) {
+                    var class2 = classArr[i].split("*");
                     var class3 = splitClass(class2);
 
                 }
@@ -501,7 +514,7 @@
 
 
 
-	</script>
+    </script>
 </html>
 
 
