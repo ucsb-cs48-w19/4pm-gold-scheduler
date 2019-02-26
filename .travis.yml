@@ -3,10 +3,10 @@ python:
   - "3.6"
 
   #command to install dependencies
-  install:
-    - pip install -4 requirements.txt
+install:
+  - pip install -4 requirements.txt
 
   #command to run tests
 
-  script:
-    - pytest
+script:
+  - pytest
