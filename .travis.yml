@@ -4,7 +4,7 @@ python:
 
   #command to install dependencies
 install:
-  - pip install -4 requirements.txt
+  - pip install -r requirements.txt
 
   #command to run tests
 
