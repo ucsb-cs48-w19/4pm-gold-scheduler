@@ -1,0 +1,71 @@
+
+.custom-select {
+  display: inline;
+}
+
+.custom-select select {
+  font-family: Arial;
+  background-color: dodgerblue;
+  width: 200px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline-block;
+  color: white;
+  line-height: 20px;
+}
+
+.custom-select button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 20px;
+  padding: 10px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.custom-select button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.custom-select button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.custom-select button:hover span {
+  padding-right: 25px;
+}
+
+.custom-select button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.custom-select label {
+  padding: 20px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+header {
+  background-color: #F2F4F4;
+}
+
+
+
+
