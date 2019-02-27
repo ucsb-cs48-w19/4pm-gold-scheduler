@@ -11,7 +11,7 @@ def index():
 
 
 @app.route('/class-select')
-def dropDownPageNew():
+def scheduleMaker():
     datas = gs.query.all()
     subject_set = set()
     for r in datas:
@@ -60,6 +60,8 @@ def load_ajax2():
         temp = proData_list[r] + "~" + days_list[r] + '~' + times_list[r]
         return_list.append(temp)
 
+    print(return_list)
+
     return json.dumps(return_list)
 
 
@@ -89,5 +91,7 @@ def load_ajax3():
     for r in range(0, len(sectionTime_list)):
         temp = sectionDay_list[r] + "~" + sectionTime_list[r]
         return_list.append(temp)
+
+    print(return_list)
 
     return json.dumps(return_list)
