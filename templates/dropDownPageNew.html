@@ -34,10 +34,14 @@
 	</select>
 
     <button type="button" onclick = "DropClass()">Drop it!</button>
+{#    <button type="button" onclick = "table()">table</button>#}
+{#    <button type="button" onclick = "deleTable()">detetable</button>#}
 
 
     <script type="text/javascript">
+
     function table() {
+            var body = document.getElementsByTagName("body")[0];
 			var weekDays = ["", "Mon", "Tue", "Wed", "Thr", "Fri"];
 			var time = ["7:00am", "8:00am", "9:00am", "10:00am", "11:00am", "12:00pm",
 			"1:00pm", "2:00pm", "3:00pm", "4:00pm", "5:00pm", "6:00pm", "7:00pm", "8:00pm",
@@ -77,8 +81,22 @@
 					table += '</tr>';
 				}
 			}
+            //var tbl = document.createElement("table");
 
-			document.write('<table border=1 bordercolor="lightgray" cellspacing="0" style="width: 100%; height: 100%;">' + table + '</table>');
+
+			//document.write('<table border=1 bordercolor="lightgray" cellspacing="0" style="width: 100%; height: 100%;">' + table + '</table>');
+			//table = '<table border=1 bordercolor="lightgray" cellspacing="0" style="width: 100%; height: 100%;">' + table + '</table>';
+			var htmlObject = document.createElement('table');
+			htmlObject.innerHTML = table;
+			//var text1 = document.createTextNode(table);
+			//tbl.appendChild(text1);
+			body.appendChild(htmlObject);
+			htmlObject.setAttribute("border", "1");
+			htmlObject.setAttribute("bordercolor", "lightgray");
+			htmlObject.setAttribute("cellspacing", "0");
+			htmlObject.setAttribute("style", "width: 100%; height: 100%;");
+			//return table;
+
 			// document.getElementById("Fri22:00").style.backgroundColor = "blue";
 			// for(var i = 0; i < 6; i ++) {
 			// 	document.getElementById('Wed3:00pm').getElementsByTagName('td')[i + 6].style.backgroundColor = "lightblue";
@@ -140,25 +158,29 @@
 
 	<script type="text/javascript">
         var classArr = [];
-        var color =["","lightblue", "yellow", "lightgrey", "blue", "orange", "green"];
-
-
-
-
-
+        var color =["","lightblue", "yellow", "lightgrey", "blue", "orange", "green", "lightblue", "lightblue", "lightblue"];
 
 		var subjectArr = {{ displayData|tojson }};
-
-
-
-
-
 
 		    //$.post("/load_ajax", {
 		      // data: JSON.stringify("world"),
             //}, function(data, status) {
 		      //  alert(data);
             //});
+        function deleTable() {
+            var element = document.getElementsByTagName("table"), index;
+
+            for (index = element.length - 1; index >= 0; index--) {
+                element[index].parentNode.removeChild(element[index]);
+            }
+            var div = document.getElementsByTagName("div"), index2;
+
+            for (index2 = div.length - 1; index2 >= 0; index2--) {
+                div[index2].parentNode.removeChild(div[index2]);
+            }
+        }
+
+
         function postSubject(val) {
 		    var val1 = val;
             //alert(val1);
@@ -247,6 +269,7 @@
 
 
 			    var lecValue = arr1[0];
+			    //alert(lecValue);
                 postLectTime(lecValue);
 
 
@@ -483,10 +506,8 @@
 
 
         function DropClass() {
-
-            var element = document.getElementsByTagName("Table");
-            var x = document.getElementsByTagName("BODY")[0];
-            element.x.removeChild(element);
+            deleTable();
+            table();
 
             var className = document.getElementById("classOn").value;
             var classIndex = 0;
@@ -522,7 +543,9 @@
 			    for(var i = 0; i < classArr.length; i++) {
 			        var class2 = classArr[i].split("*");
                     var class3 = splitClass(class2);
-
+                    for(var j = 1; j < class3.length; j++) {
+                        addColor(class2[0], class3[j], color[i+1]);
+                    }
                 }
         }
 
@@ -657,7 +680,7 @@
                 for (i = 0; i < secdate.length; i++) {
                     bigFinalData.push(secTimeFinal[i])
                 }
-                alert(bigFinalData);
+                //alert(bigFinalData);
                 return bigFinalData;
             }
         }
