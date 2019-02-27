@@ -11,7 +11,7 @@ def index():
 
 
 @app.route('/class-select')
-def dropDownPageNew():
+def scheduleMaker():
     datas = gs.query.all()
     subject_set = set()
     for r in datas:
