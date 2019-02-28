@@ -5,164 +5,202 @@
 	<title>Time Table</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="../static/js/addColor.js"></script>
-    <script src="../static/js/dropdownListAdding.js"></script>
     <link href="{{ url_for('static', filename='css/mainSelect.css') }}" type="text/css" rel="stylesheet">
+    <script src="../static/js/dropdownListAdding.js"></script>
 </head>
 <body onload="addSubject()">
 
-    <header>
+<header id="header">
+        <label>Subject: <select id="subject" onchange="postSubject(this.value) ">
+		        <option value="0">--Please Choose--</option>
+	        </select>
+        </label>
 
-    <div class="custom-select">
-    
-    <label>Subject:  <select id="subject" onchange="postSubject(this.value) ">
-        <option value="0">--Please Choose--</option>
-    </select>
-    </label>
 
-    <label>Class:<select id="class1" onchange="postSubClass(this.value)">
-        <option value="0">--Please Choose--</option>
-    </select>
-    </label>
+        <label>Class: <select id="class1" onchange="postSubClass(this.value)">
+		            <option value="0">--Please Choose--</option>
+	            </select>
+        </label>
 
-    <label>Lecture:  <select id="teacherLecTime" onchange="postLectTime(this.value)">
-        <option value="0">--Please Choose--</option>
-    </select>
-    </label>
 
-    <label>Section:  <select id="section">
-        <option value="0">--Please Choose--</option>
-    </select>
-    </label>
+
+        <label>Lecture: <select id="teacherLecTime" onchange="postLectTime(this.value)">
+		                    <option value="0">--Please Choose--</option>
+	                </select>
+        </label>
+
+
+        <label> Section: <select id="section">
+		                        <option value="0">--Please Choose--</option>
+	                    </select>
+        </label>
+
     <button class="button" style="vertical-align:middle" onclick = "addClass()"><span>addClass</span></button>
 
     </br>
 
-    <label>Your Class:  <select id="classOn">
-        <option value="0">Your class will be here!</option>
-    </select>
-    </label>
-  
+        <label>Your Class: <select id="classOn">
+		                        <option value="0">Your class will be here!</option>
+                    </select>
+        </label>
+
 
     <button class="button" style="vertical-align:middle" onclick = "DropClass()"><span>Drop it!</span></button>
-    </div>
+    <!-- <button type="button" onclick = "table()">table</button>
+    <button type="button" onclick = "deleTable()">detetable</button> -->
+</header>
 
-    </header>
+    <button class="button" style="vertical-align:middle" onclick = "addNewPlan()"><span>Add New Plan!</span></button>
 
     <script type="text/javascript">
+
     function table() {
-            var weekDays = ["", "Mon", "Tue", "Wed", "Thr", "Fri"];
-            var time = ["7:00am", "8:00am", "9:00am", "10:00am", "11:00am", "12:00pm",
-            "1:00pm", "2:00pm", "3:00pm", "4:00pm", "5:00pm", "6:00pm", "7:00pm", "8:00pm",
-            "9:00pm", "10:00pm"];
-            var index = 0;
-            var table = '';
-            var rows = 18;
-            var cols = 6;
-            for (var r = 0; r < rows; r++){
-                if(r == 0) {
-                    table += '<tr>';
-                    table += '<th height = "60" colspan="6" id = "title">' +  'Time Table' + '</th>';
-                    // table += '<th colspan= "6">' + Time Table + '</th>';
-                    table += '</tr>';
+            var body = document.getElementsByTagName("body")[0];
+			var weekDays = ["", "Mon", "Tue", "Wed", "Thr", "Fri"];
+			var time = ["7:00am", "8:00am", "9:00am", "10:00am", "11:00am", "12:00pm",
+			"1:00pm", "2:00pm", "3:00pm", "4:00pm", "5:00pm", "6:00pm", "7:00pm", "8:00pm",
+			"9:00pm", "10:00pm"];
+			var index = 0;
+			var table = '';
+			var rows = 18;
+			var cols = 6;
+			for (var r = 0; r < rows; r++){
+				if(r == 0) {
+					table += '<tr>';
+					table += '<th height = "60" colspan="6" id = "title">' +  'Time Table' + '</th>';
+					// table += '<th colspan= "6">' + Time Table + '</th>';
+					table += '</tr>';
 
-                } else if(r == 1) {
-                    table += '<tr>';
-                    for (var c = 0; c < cols; c++) {
-                        table += '<th width ="60" height = "60" id='+ weekDays[c] + '>' + weekDays[c] + '</th>';
-                    }
-                    table += '</tr>';
-                } else if(r == 2){
-                    table += '<tr>';
-                        for(var c = 0; c < cols; c++) {
-                            if(c==0) {
-                                table += '<td height = "60">' + time[index] +'</td>';
-                                index++;
-                            } else {
-                                table += '<td rowspan="16" id='+ weekDays[c] + 'T' +'>' + nestedTable() +'</td>';
-                            }
-                        }
-                    table += '</tr>';
-                } else {
-                    table += '<tr>';
-                        table += '<td height = "60">' + time[index] +'</td>';
-                                index++;
-                    table += '</tr>';
-                }
-            }
-
-            document.write('<table border=1 bordercolor="lightgray" cellspacing="0" style="width: 100%; height: 100%;">' + table + '</table>');
-
-        }
-
-        function nestedTable() {
-            var nestedTable = '';
-            var row = 192;
-            nestedTable += '<table border=0 cellspacing="0" style="width: 100%; height: 100%;">';
-            for(var r = 0; r < row; r++) {
-                nestedTable += '<tr>' + '<td heigh = "9">' + '</td>' + '</tr>'
-            }
-            nestedTable += '</table>';
-            return nestedTable;
-        }
+				} else if(r == 1) {
+					table += '<tr>';
+					for (var c = 0; c < cols; c++) {
+						table += '<th width ="60" height = "60" id='+ weekDays[c] + '>' + weekDays[c] + '</th>';
+					}
+					table += '</tr>';
+				} else if(r == 2){
+					table += '<tr>';
+						for(var c = 0; c < cols; c++) {
+							if(c==0) {
+								table += '<td height = "60">' + time[index] +'</td>';
+								index++;
+							} else {
+								table += '<td rowspan="16" id='+ weekDays[c] + 'T' +'>' + nestedTable() +'</td>';
+							}
+						}
+					table += '</tr>';
+				} else {
+					table += '<tr>';
+						table += '<td height = "60">' + time[index] +'</td>';
+								index++;
+					table += '</tr>';
+				}
+			}
+            //var tbl = document.createElement("table");
 
 
-        function timeSplit(string) {
-            //MW2:00pm-3:15pm
-            // var string = "Mon1530-1645";
-            var day = string.substring(0, 3);
-            var time = string.substring(3);
-            var res = time.split("-");
-            var TimeS = res[0];
-            var TimeE = res[1];
-            var hourS = parseInt(TimeS.substring(0, 2), 10);
-            var minS = parseInt(TimeS.substring(2), 10);
-            var hourE = parseInt(TimeE.substring(0, 2), 10);
-            var minE = parseInt(TimeE.substring(2), 10);
-            var diffHour = hourE - hourS;
-            var diffMin = minE - minS;
-            var startCell = ((hourS-7)*12) + (minS/5);
-            var numOfCells = (diffHour*12) + (diffMin/5);
-            return [startCell, numOfCells, day];
-        }
+			//document.write('<table border=1 bordercolor="lightgray" cellspacing="0" style="width: 100%; height: 100%;">' + table + '</table>');
+			//table = '<table border=1 bordercolor="lightgray" cellspacing="0" style="width: 100%; height: 100%;">' + table + '</table>';
+			var htmlObject = document.createElement('table');
+			htmlObject.innerHTML = table;
+			//var text1 = document.createTextNode(table);
+			//tbl.appendChild(text1);
+			body.appendChild(htmlObject);
+			htmlObject.setAttribute("border", "1");
+			htmlObject.setAttribute("bordercolor", "lightgray");
+			htmlObject.setAttribute("cellspacing", "0");
+			htmlObject.setAttribute("style", "width: 100%; height: 100%;");
+			//return table;
 
-        var a = 0;
+			// document.getElementById("Fri22:00").style.backgroundColor = "blue";
+			// for(var i = 0; i < 6; i ++) {
+			// 	document.getElementById('Wed3:00pm').getElementsByTagName('td')[i + 6].style.backgroundColor = "lightblue";
+			// }
+			// for(var i = 0; i < 9; i ++) {
+			// 	document.getElementById('Wed4:00pm').getElementsByTagName('td')[i].style.backgroundColor = "lightblue";
+			// }
 
 
+		}
 
-        var time1 = "Thr1530-1645";
-        var time2 = "Wed1530-1645";
-        var time3 = "Fri0900-0955";
-        var time4 = "Fri0800-1000";
-        table();
+		function nestedTable() {
+			var nestedTable = '';
+			var row = 192;
+			nestedTable += '<table border=0 cellspacing="0" style="width: 100%; height: 100%;">';
+			for(var r = 0; r < row; r++) {
+				nestedTable += '<tr>' + '<td heigh = "9">' + '</td>' + '</tr>'
+			}
+			nestedTable += '</table>';
+			return nestedTable;
+		}
 
-             // document.getElementById('MonT').getElementsByTagName('td')[115].innerHTML = "Math";
+
+		function timeSplit(string) {
+			//MW2:00pm-3:15pm
+			// var string = "Mon1530-1645";
+			var day = string.substring(0, 3);
+			var time = string.substring(3);
+			var res = time.split("-");
+			var TimeS = res[0];
+			var TimeE = res[1];
+			var hourS = parseInt(TimeS.substring(0, 2), 10);
+			var minS = parseInt(TimeS.substring(2), 10);
+			var hourE = parseInt(TimeE.substring(0, 2), 10);
+			var minE = parseInt(TimeE.substring(2), 10);
+			var diffHour = hourE - hourS;
+			var diffMin = minE - minS;
+			var startCell = ((hourS-7)*12) + (minS/5);
+			var numOfCells = (diffHour*12) + (diffMin/5);
+			return [startCell, numOfCells, day];
+		}
+
+		var a = 0;
+
+		table();
+
+			 // document.getElementById('MonT').getElementsByTagName('td')[115].innerHTML = "Math";
 
 
         </script>
 
 </body>
 
-    <script type="text/javascript">
-
+	<script type="text/javascript">
+        var classArr = [];
         var color =["","Lavender", "MistyRose", "lightgrey", "lightblue", "LightCoral", "LightSkyBlue"];
-        var subjectArr = {{ displayData|tojson }};
 
+		var subjectArr = {{ displayData|tojson }};
 
+		    //$.post("/load_ajax", {
+		      // data: JSON.stringify("world"),
+            //}, function(data, status) {
+		      //  alert(data);
+            //});
+        function deleTable() {
+            var element = document.getElementsByTagName("table"), index;
 
+            for (index = element.length - 1; index >= 0; index--) {
+                element[index].parentNode.removeChild(element[index]);
+            }
+            var div = document.getElementsByTagName("div"), index2;
 
-
-
-
-
-
-
-
-        function getValue() {
-            var classValue = document.getElementById("class1").value;
-            alert(classValue);
+            for (index2 = div.length - 1; index2 >= 0; index2--) {
+                div[index2].parentNode.removeChild(div[index2]);
+            }
         }
 
-        function clearData (string) {
+
+
+
+
+
+
+
+
+
+
+
+
+		function clearData (string) {
             var s1 = string.substring(1);
             var s2 = s1.substring(0, s1.length-1);
             var goodData = s2.split(",");
@@ -176,15 +214,25 @@
         }
 
 
+
+
+
         function finalSplite() {
             var sub = document.getElementById("subject").value;
             var classValue = document.getElementById("class1").value;
             var lecValue = document.getElementById("teacherLecTime").value;
             var sectionValue = document.getElementById("section").value;
 
+            if(lecValue == "T B A~T B A~T B A") {
+                return "";
+            }
+
+
             var finalData = classValue + "~" + lecValue + "~" + sectionValue;
 
-            if (finalData == "0~0~0") {
+
+
+            if (finalData == "0~0~0" || finalData == "~~") {
                 return "";
             } else {
 
@@ -333,10 +381,8 @@
 
 
         function DropClass() {
-
-            var element = document.getElementsByTagName("Table");
-            var x = document.getElementsByTagName("BODY")[0];
-            element.x.removeChild(element);
+            deleTable();
+            table();
 
             var className = document.getElementById("classOn").value;
             var classIndex = 0;
@@ -349,32 +395,73 @@
             var arr1 = classArr;
 
 
-            var classOn = document.getElementById("classOn");
+		    var classOn = document.getElementById("classOn");
 
 
-                var options1 = classOn.getElementsByTagName("option");
-            for(var m = 0; m<options1.length; m++)
-            {
-                var op = options1[m];
-                classOn.removeChild(op);
-                m--;
-            }
+			    var options1 = classOn.getElementsByTagName("option");
+			for(var m = 0; m<options1.length; m++)
+			{
+				var op = options1[m];
+				classOn.removeChild(op);
+				m--;
+			}
 
-                for(var j = 0; j<arr1.length; j++)
-                    {
-                        var value1 = arr1[j];
-                        var option1 = document.createElement("option");
-                        var text1 = document.createTextNode(value1);
-                        option1.appendChild(text1);
-                        classOn.appendChild(option1);
-                    }
+			    for(var j = 0; j<arr1.length; j++)
+					{
+						var value1 = arr1[j];
+						var option1 = document.createElement("option");
+						var text1 = document.createTextNode(value1);
+						option1.appendChild(text1);
+						classOn.appendChild(option1);
+					}
 
-                for(var i = 0; i < classArr.length; i++) {
-                    var class2 = classArr[i].split("*");
+			    for(var i = 0; i < classArr.length; i++) {
+			        var class2 = classArr[i].split("*");
                     var class3 = splitClass(class2);
-
+                    for(var j = 1; j < class3.length; j++) {
+                        addColor(class2[0], class3[j], color[i+1]);
+                    }
                 }
+			    colorIndex = classArr.length + 1;
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         function splitClass(arr) {
@@ -507,14 +594,32 @@
                 for (i = 0; i < secdate.length; i++) {
                     bigFinalData.push(secTimeFinal[i])
                 }
-                alert(bigFinalData);
+                //alert(bigFinalData);
                 return bigFinalData;
             }
         }
 
 
 
-    </script>
+
+
+
+        var buttonIndex = 1;
+        function addNewPlan() {
+            var header = document.getElementById("header");
+            var btn = document.createElement("BUTTON");
+            var text = "Plan" + buttonIndex;
+            var t = document.createTextNode(text);       // Create a text node
+            btn.appendChild(t);
+			header.appendChild(btn);
+			buttonIndex++;
+        }
+
+
+
+
+
+	</script>
 </html>
 
 
