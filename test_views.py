@@ -1,6 +1,7 @@
 import os 
 import tempfile
-from flask import render_template
+import json
+from flask import Flask, render_template, request
 from views import index
 from app import app
 
