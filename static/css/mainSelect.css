@@ -1,23 +1,23 @@
 
-.custom-select {
+header {
   display: inline;
 }
 
-.custom-select select {
+header select {
   font-family: Arial;
-  background-color: dodgerblue;
-  width: 200px;
+  background-color: lightblue;
+  width: auto;
   font-size: 16px;
   border: 1px solid #ccc;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   display: inline-block;
-  color: white;
+  color: purple;
   line-height: 20px;
 }
 
-.custom-select button {
+header button {
   display: inline-block;
   border-radius: 4px;
   background-color: #f4511e;
@@ -32,14 +32,14 @@
   margin: 5px;
 }
 
-.custom-select button span {
+header button span {
   cursor: pointer;
   display: inline-block;
   position: relative;
   transition: 0.5s;
 }
 
-.custom-select button span:after {
+header button span:after {
   content: '\00bb';
   position: absolute;
   opacity: 0;
@@ -48,16 +48,16 @@
   transition: 0.5s;
 }
 
-.custom-select button:hover span {
+header button:hover span {
   padding-right: 25px;
 }
 
-.custom-select button:hover span:after {
+header button:hover span:after {
   opacity: 1;
   right: 0;
 }
 
-.custom-select label {
+header label {
   padding: 20px;
   font-family: 'Open Sans', sans-serif;
 }

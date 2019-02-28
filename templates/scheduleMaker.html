@@ -5,37 +5,52 @@
 	<title>Time Table</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="../static/js/addColor.js"></script>
+    <link href="{{ url_for('static', filename='css/mainSelect.css') }}" type="text/css" rel="stylesheet">
     <script src="../static/js/dropdownListAdding.js"></script>
 </head>
 <body onload="addSubject()">
 
-	<select id="subject" onchange="postSubject(this.value) ">
-		<option value="0">--Please Choose--</option>
-	</select>
+<header id="header">
+        <label>Subject: <select id="subject" onchange="postSubject(this.value) ">
+		        <option value="0">--Please Choose--</option>
+	        </select>
+        </label>
 
-	<select id="class1" onchange="postSubClass(this.value)">
-		<option value="0">--Please Choose--</option>
-	</select>
 
-	<select id="teacherLecTime" onchange="postLectTime(this.value)">
-		<option value="0">--Please Choose--</option>
-	</select>
+        <label>Class: <select id="class1" onchange="postSubClass(this.value)">
+		            <option value="0">--Please Choose--</option>
+	            </select>
+        </label>
 
-    <select id="section">
-		<option value="0">--Please Choose--</option>
-	</select>
-    <button type="button" onclick = "addClass()">addClass</button>
+
+
+        <label>Lecture: <select id="teacherLecTime" onchange="postLectTime(this.value)">
+		                    <option value="0">--Please Choose--</option>
+	                </select>
+        </label>
+
+
+        <label> Section: <select id="section">
+		                        <option value="0">--Please Choose--</option>
+	                    </select>
+        </label>
+
+    <button class="button" style="vertical-align:middle" onclick = "addClass()"><span>addClass</span></button>
 
     </br>
 
-    <select id="classOn">
-		<option value="0">Your class will be here!</option>
-	</select>
+        <label>Your Class: <select id="classOn">
+		                        <option value="0">Your class will be here!</option>
+                    </select>
+        </label>
 
-    <button type="button" onclick = "DropClass()">Drop it!</button>
+
+    <button class="button" style="vertical-align:middle" onclick = "DropClass()"><span>Drop it!</span></button>
     <!-- <button type="button" onclick = "table()">table</button>
     <button type="button" onclick = "deleTable()">detetable</button> -->
+</header>
 
+    <button class="button" style="vertical-align:middle" onclick = "addNewPlan()"><span>Add New Plan!</span></button>
 
     <script type="text/javascript">
 
@@ -185,7 +200,6 @@
 
 
 
-
 		function clearData (string) {
             var s1 = string.substring(1);
             var s2 = s1.substring(0, s1.length-1);
@@ -209,9 +223,16 @@
             var lecValue = document.getElementById("teacherLecTime").value;
             var sectionValue = document.getElementById("section").value;
 
+            if(lecValue == "T B A~T B A~T B A") {
+                return "";
+            }
+
+
             var finalData = classValue + "~" + lecValue + "~" + sectionValue;
 
-            if (finalData == "0~0~0") {
+
+
+            if (finalData == "0~0~0" || finalData == "~~") {
                 return "";
             } else {
 
@@ -400,9 +421,47 @@
                     for(var j = 1; j < class3.length; j++) {
                         addColor(class2[0], class3[j], color[i+1]);
                     }
-                    colorIndex = classArr.length+1;
                 }
+			    colorIndex = classArr.length + 1;
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         function splitClass(arr) {
@@ -539,6 +598,24 @@
                 return bigFinalData;
             }
         }
+
+
+
+
+
+
+        var buttonIndex = 1;
+        function addNewPlan() {
+            var header = document.getElementById("header");
+            var btn = document.createElement("BUTTON");
+            var text = "Plan" + buttonIndex;
+            var t = document.createTextNode(text);       // Create a text node
+            btn.appendChild(t);
+			header.appendChild(btn);
+			buttonIndex++;
+        }
+
+
 
 
 

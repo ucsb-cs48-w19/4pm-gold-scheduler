@@ -18,7 +18,14 @@ function addColor(className, string, color) {
 	var body1 = document.getElementsByTagName("BODY")[0];
 	var div1 = document.createElement('div');
 	var text1 = document.createTextNode(className);
+	var day = string.substring(0, 3);
+	var hourS = string.substring(3, 5);
+	var minS = string.substring(5, 7);
+	var hourE = string.substring(8, 10);
+	var minE = string.substring(10, 12);
+	string = day + " " + hourS + ":" + minS + "-" + hourE + ":" + minE;
 	var text2 = document.createTextNode(string);
+
 
 	div1.style.position = 'absolute';
 

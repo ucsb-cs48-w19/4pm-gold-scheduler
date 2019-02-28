@@ -47,36 +47,6 @@ function postSubject(val) {
 	});
 }
 
-// add classes into third dropdown list(classes)
-function postLectTime(val) {
-	$.ajax({
-		type : "POST",
-		url : "/load_ajax3",
-		data: JSON.stringify(val, null, '\t'),
-		contentType: 'application/json;charset=UTF-8',
-		success: function(result) {
-			//var ini = ["--Please Choose--"];
-			var arr1 = clearData(result);
-			//var arr1 = ini.concat(arr2);
-			var section = document.getElementById("section");
-			var options1 = section.getElementsByTagName("option");
-
-			for(var m = 0; m<options1.length; m++) {
-				var op = options1[m];
-				section.removeChild(op);
-				m--;
-			}
-
-			for(var j = 0; j<arr1.length; j++) {
-				var value1 = arr1[j];
-				var option1 = document.createElement("option");
-				var text1 = document.createTextNode(value1);
-				option1.appendChild(text1);
-				section.appendChild(option1);
-			}
-		}
-	});
-}
 
 // add sections into forth dropdown list(section)
 function postSubClass(class1) {
@@ -113,50 +83,98 @@ function postSubClass(class1) {
 	});
 }
 
+
+
+
+// add classes into third dropdown list(classes)
+function postLectTime(val) {
+	var className = document.getElementById("class1").value;
+	var valWithClass = className + "~" + val;
+	//alert(valWithClass);
+	$.ajax({
+		type : "POST",
+		url : "/load_ajax3",
+		data: JSON.stringify(valWithClass, null, '\t'),
+		contentType: 'application/json;charset=UTF-8',
+		success: function(result) {
+			//var ini = ["--Please Choose--"];
+			var arr1 = clearData(result);
+			//var arr1 = ini.concat(arr2);
+			var section = document.getElementById("section");
+			var options1 = section.getElementsByTagName("option");
+
+			for(var m = 0; m<options1.length; m++) {
+				var op = options1[m];
+				section.removeChild(op);
+				m--;
+			}
+
+			for(var j = 0; j<arr1.length; j++) {
+				var value1 = arr1[j];
+				var option1 = document.createElement("option");
+				var text1 = document.createTextNode(value1);
+				option1.appendChild(text1);
+				section.appendChild(option1);
+			}
+		}
+	});
+}
+
+
+
+
+
+
+
+
+
 // add classes into weekly schedule table
 // also add classes into fifth dropdown list(user classeslist)
 function addClass() {
-
 	var sub = document.getElementById("subject").value;
 	var classValue = document.getElementById("class1").value;
 	var lecValue = document.getElementById("teacherLecTime").value;
 	var sectionValue = document.getElementById("section").value;
 
 	var finalData = classValue + "*" + lecValue + "*" + sectionValue;
-
-	var data = finalSplite();
-	if(data == "") {
-		alert("Please choose a course! Or go home!");
+	var contain = classArr.includes(finalData);
+	if (contain) {
+		alert("The class has been registered!");
 	} else {
-		var className = data[0];
-		for(var i = 1; i < data.length; i ++) {
-		addColor(data[0], data[i], color[colorIndex]);
-	}
-	}
-	colorIndex++;
-	classArr.push(finalData);
 
-	var arr1 = classArr;
+		var data = finalSplite();
+		if (data == "") {
+			alert("No time section!");
+		} else {
+			var className = data[0];
+			for (var i = 1; i < data.length; i++) {
+				addColor(data[0], data[i], color[colorIndex]);
+			}
+
+			colorIndex++;
+			classArr.push(finalData);
+
+			var arr1 = classArr;
 
 
-	var classOn = document.getElementById("classOn");
+			var classOn = document.getElementById("classOn");
 
 
-		var options1 = classOn.getElementsByTagName("option");
-	for(var m = 0; m<options1.length; m++)
-	{
-		var op = options1[m];
-		classOn.removeChild(op);
-		m--;
-	}
+			var options1 = classOn.getElementsByTagName("option");
+			for (var m = 0; m < options1.length; m++) {
+				var op = options1[m];
+				classOn.removeChild(op);
+				m--;
+			}
 
-	for(var j = 0; j<arr1.length; j++)
-	{
-		var value1 = arr1[j];
-		var option1 = document.createElement("option");
-		var text1 = document.createTextNode(value1);
-		option1.appendChild(text1);
-		classOn.appendChild(option1);
+			for (var j = 0; j < arr1.length; j++) {
+				var value1 = arr1[j];
+				var option1 = document.createElement("option");
+				var text1 = document.createTextNode(value1);
+				option1.appendChild(text1);
+				classOn.appendChild(option1);
+			}
+		}
 	}
 }
 
