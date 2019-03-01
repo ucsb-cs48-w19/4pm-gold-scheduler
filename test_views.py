@@ -26,11 +26,21 @@ class FlaskTestCase(unittest.TestCase):
 		tester = app.test_client(self)
 		response = tester.get('/class-select', content_type = 'html/text')
 		self.assertEqual(response.status_code,200)
+
 	#ensure that flask the schedule maker page loads correctly
 	def test_views_scheduleMaker_load(self):
 		tester = app.test_client(self)
 		response = tester.get('/class-select', content_type = 'html/text')
 		self.assertTrue(b'Subject:' in response.data)
+
+	#ensure the botton in first page can lead to the second page
+	def test_correct_change(self):
+		tester = app.test_client(self)
+		response = tester.post(
+			'/',
+			follow_redirects = True;
+			)
+		self.assertIn(b'Subject:' in response.data)
 
 
 if __name__ == '__main__':
