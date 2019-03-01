@@ -4,6 +4,10 @@ python:
 # command to install dependencies
 install:
   - pip install -r requirements.txt
+  
+#set the environment
+env:
+  - DATABASE_URL=postgres://jxxblesrascyio:a447ed84172575a035b9fa57af3f819f0c1163fe46da6c3469f110293e0412f1@ec2-54-243-223-245.compute-1.amazonaws.com:5432/d37d890uhbs9gv
 # command to run tests
 script:
   - pytest
