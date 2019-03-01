@@ -26,10 +26,10 @@ class FlaskTestCase(unittest.TestCase):
 		tester = app.test_client(self)
 		response = tester.get('/class-select', content_type = 'html/text')
 		self.assertEqual(response.status_code,200)
-
+	#ensure that flask the schedule maker page loads correctly
 	def test_views_scheduleMaker_load(self):
 		tester = app.test_client(self)
-		response = tester.get('/', content_type = 'html/text')
+		response = tester.get('/class-select', content_type = 'html/text')
 		self.assertTrue(b'Subject:' in response.data)
 
 
