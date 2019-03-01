@@ -3,7 +3,7 @@ import unittest
 
 from flask import render_template, Flask, request, jsonify, session, redirect, url_for, flash
 from routes import index, scheduleMaker
-from app import app
+from routes import app
 
 
 class FlaskTestCase(unittest.TestCase):
