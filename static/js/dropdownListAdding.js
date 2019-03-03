@@ -130,19 +130,27 @@ function postLectTime(val) {
 
 // add classes into weekly schedule table
 // also add classes into fifth dropdown list(user classeslist)
+<<<<<<< HEAD
 function addClass(planIndex) {
+=======
+function addClass() {
+>>>>>>> 660e042a593fcc03df352e59e35348c0da591e87
 	var sub = document.getElementById("subject").value;
 	var classValue = document.getElementById("class1").value;
 	var lecValue = document.getElementById("teacherLecTime").value;
 	var sectionValue = document.getElementById("section").value;
 
 	var finalData = classValue + "*" + lecValue + "*" + sectionValue;
+<<<<<<< HEAD
 	var classIn = [];
 	for(var i = 0; i < classArr[planIndex].length; i++) {
 		var cn = classArr[planIndex][i].split("*");
 		classIn.push(cn[0]);
 	}
 	var contain = classIn.includes(classValue);
+=======
+	var contain = classArr.includes(finalData);
+>>>>>>> 660e042a593fcc03df352e59e35348c0da591e87
 	if (contain) {
 		alert("The class has been registered!");
 	} else {
@@ -157,9 +165,15 @@ function addClass(planIndex) {
 			}
 
 			colorIndex++;
+<<<<<<< HEAD
 			classArr[planIndex].push(finalData);
 
 			var arr1 = classArr[planIndex];
+=======
+			classArr.push(finalData);
+
+			var arr1 = classArr;
+>>>>>>> 660e042a593fcc03df352e59e35348c0da591e87
 
 
 			var classOn = document.getElementById("classOn");

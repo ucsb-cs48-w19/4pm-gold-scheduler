@@ -1,4 +1,3 @@
-
 import os
 import json
 from flask import Flask, render_template, request
@@ -7,8 +6,9 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://jxxblesrascyio:a447ed84172575a035b9fa57af3f819f0c1163fe46da6c3469f110293e0412f1@ec2-54-243-223-245.compute-1.amazonaws.com:5432/d37d890uhbs9gv'
-#app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -100,8 +100,9 @@ def load_ajax2():
 def load_ajax3():
     proAndTimes = request.get_json()
     return_list = ''
+
     if (proAndTimes != '~'):
-        print(proAndTimes)
+
         courseName, prof, day, time = proAndTimes.split('~')
         returnData = db.session.query(gs).filter((gs.courseID == courseName) & (gs.proName == prof) & (gs.times == time)).limit(1).all()
 
@@ -125,8 +126,6 @@ def load_ajax3():
         for r in range (0, len(sectionTime_list)):
             temp = sectionDay_list[r] + "~" + sectionTime_list[r]
             return_list.append(temp)
-
-    print(return_list)
 
     return json.dumps(return_list)
 
