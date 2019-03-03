@@ -117,3 +117,6 @@ dmypy.json
 
 # Pycharm stuff
 .idea/
+
+# Bad mac stuff
+.DS_Store

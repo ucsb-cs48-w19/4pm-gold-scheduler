@@ -35,7 +35,7 @@
 	                    </select>
         </label>
 
-    <button class="button" style="vertical-align:middle" onclick = "addClass()"><span>addClass</span></button>
+    <button class="button" style="vertical-align:middle" onclick = "addClass(planIndex)"><span>addClass</span></button>
 
     </br>
 
@@ -45,16 +45,19 @@
         </label>
 
 
-    <button class="button" style="vertical-align:middle" onclick = "DropClass()"><span>Drop it!</span></button>
+    <button class="button"  onclick = "DropClass(planIndex)"><span>Drop it!</span></button>
     <!-- <button type="button" onclick = "table()">table</button>
     <button type="button" onclick = "deleTable()">detetable</button> -->
+    <br>
+    <button class="button" value="DEFAULT SCHEDULE" id="0" onclick = "printTimeTable(this.id, this.value)"><span>DEFAULT SCHEDULE</span></button>
 </header>
 
-    <button class="button" style="vertical-align:middle" onclick = "addNewPlan()"><span>Add New Plan!</span></button>
+    <button class="button" id="AddNewPlan" style="vertical-align:middle" onclick = "addNewPlan()"><span>Add New Plan!</span></button>
 
     <script type="text/javascript">
 
-    function table() {
+    function table(tableName) {
+            if(tableName === undefined) tableName = "DEFAULT SCHEDULE";
             var body = document.getElementsByTagName("body")[0];
 			var weekDays = ["", "Mon", "Tue", "Wed", "Thr", "Fri"];
 			var time = ["7:00am", "8:00am", "9:00am", "10:00am", "11:00am", "12:00pm",
@@ -67,7 +70,7 @@
 			for (var r = 0; r < rows; r++){
 				if(r == 0) {
 					table += '<tr>';
-					table += '<th height = "60" colspan="6" id = "title">' +  'Time Table' + '</th>';
+					table += '<th height = "60" colspan="6" id = "title">' +  tableName + '</th>';
 					// table += '<th colspan= "6">' + Time Table + '</th>';
 					table += '</tr>';
 
@@ -155,7 +158,7 @@
 
 		var a = 0;
 
-		table();
+		table("DEFAULT SCHEDULE");
 
 			 // document.getElementById('MonT').getElementsByTagName('td')[115].innerHTML = "Math";
 
@@ -164,9 +167,18 @@
 
 </body>
 
+
 	<script type="text/javascript">
-        var classArr = [];
+        var classArr = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [],
+            [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [],
+            [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [],
+            [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [],
+            [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [],
+            [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [],
+            [], [], []];
         var color =["","Lavender", "MistyRose", "lightgrey", "lightblue", "LightCoral", "LightSkyBlue"];
+        var planIndex = 0;
+        var tableName;
 
 		var subjectArr = {{ displayData|tojson }};
 
@@ -223,9 +235,19 @@
             var lecValue = document.getElementById("teacherLecTime").value;
             var sectionValue = document.getElementById("section").value;
 
+            var testLecValue = lecValue.split("~");
+
+
             if(lecValue == "T B A~T B A~T B A") {
                 return "";
             }
+
+
+            if(testLecValue[1] == "T B A" || testLecValue[2] == "T B A") {
+                return "";
+            }
+
+
 
 
             var finalData = classValue + "~" + lecValue + "~" + sectionValue;
@@ -380,19 +402,19 @@
         var colorIndex = 1;
 
 
-        function DropClass() {
+        function DropClass(index) {
             deleTable();
-            table();
+            table(tableName);
 
             var className = document.getElementById("classOn").value;
             var classIndex = 0;
-            for (var i = 0; i < classArr.length; i ++) {
-                if(className == classArr[i]) {
-                    classArr.splice(i, 1);
+            for (var i = 0; i < classArr[index].length; i ++) {
+                if(className == classArr[index][i]) {
+                    classArr[index].splice(i, 1);
                 }
             }
 
-            var arr1 = classArr;
+            var arr1 = classArr[index];
 
 
 		    var classOn = document.getElementById("classOn");
@@ -415,14 +437,14 @@
 						classOn.appendChild(option1);
 					}
 
-			    for(var i = 0; i < classArr.length; i++) {
-			        var class2 = classArr[i].split("*");
+			    for(var i = 0; i < classArr[index].length; i++) {
+			        var class2 = classArr[index][i].split("*");
                     var class3 = splitClass(class2);
                     for(var j = 1; j < class3.length; j++) {
                         addColor(class2[0], class3[j], color[i+1]);
                     }
                 }
-			    colorIndex = classArr.length + 1;
+			    colorIndex = classArr[index].length + 1;
         }
 
 
@@ -608,11 +630,80 @@
         function addNewPlan() {
             var header = document.getElementById("header");
             var btn = document.createElement("BUTTON");
-            var text = "Plan" + buttonIndex;
+            //var text = "Plan" + buttonIndex;
+            var text;
+            do {
+                text = prompt("What do you want to name this plan?");
+            } while (text === "" );
+
+            if(text === null || text === undefined) {
+                return;
+            }
+            tableName = text;
             var t = document.createTextNode(text);       // Create a text node
             btn.appendChild(t);
 			header.appendChild(btn);
+			btn.id = buttonIndex;
+			btn.className = "button";
+			btn.value = text;
+			//btn.onclick = printTimeTable(btn.id);
+            btn.setAttribute( "onClick", "javascript: printTimeTable(this.id, this.value);" );
+
+            //btn.onclick = printTimeTable(btn.id);
+            document.getElementById(buttonIndex).click();
 			buttonIndex++;
+        }
+
+
+        function printTimeTable(id, value) {
+            //alert(value);
+            //alert(id);
+            deleTable();
+
+
+
+            planIndex = parseInt(id, 10);
+            table(value);
+
+            //var className = document.getElementById("classOn").value;
+            var classIndex = 0;
+            //for (var i = 0; i < classArr[planIndex].length; i ++) {
+            //    if(className == classArr[planIndex][i]) {
+            //        classArr[planIndex].splice(i, 1);
+            //    }
+            //}
+
+            var arr1 = classArr[planIndex];
+
+
+		    var classOn = document.getElementById("classOn");
+
+
+			    var options1 = classOn.getElementsByTagName("option");
+			for(var m = 0; m<options1.length; m++)
+			{
+				var op = options1[m];
+				classOn.removeChild(op);
+				m--;
+			}
+
+			    for(var j = 0; j<arr1.length; j++)
+					{
+						var value1 = arr1[j];
+						var option1 = document.createElement("option");
+						var text1 = document.createTextNode(value1);
+						option1.appendChild(text1);
+						classOn.appendChild(option1);
+					}
+
+			    for(var i = 0; i < classArr[planIndex].length; i++) {
+			        var class2 = classArr[planIndex][i].split("*");
+                    var class3 = splitClass(class2);
+                    for(var j = 1; j < class3.length; j++) {
+                        addColor(class2[0], class3[j], color[i+1]);
+                    }
+                }
+			    colorIndex = classArr[planIndex].length + 1;
         }
 
 
