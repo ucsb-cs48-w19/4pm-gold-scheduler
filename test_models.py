@@ -1,12 +1,9 @@
 import os
 import tempfile
-
 import pytest
 
-from __init__ import db
-
-from models import gs
-
+from routes import db, gs
+#from routes import gs
 
 def test_db():
 	assert gs.__tablename__ == "spring2019table"
@@ -43,7 +40,7 @@ def test_init_8():
 	if(gs.id == 1):
 		assert gs.locations == "IV THEA1"
 #	gs.__init__(gs,"Computer Science","1234567","CMPSC 8","Diba","lec","T W","11:00-12:15","Phelps")
-#	
+#
 #	assert gs.subjectName == "Course1"
 #	assert gs.courseID == "1234567"
 #	assert gs.lecOrSection == "lec"
