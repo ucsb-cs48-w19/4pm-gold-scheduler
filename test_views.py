@@ -1,10 +1,14 @@
+#test_views.py
 import pytest
 import unittest
 
 from flask import render_template, Flask, request, jsonify, session, redirect, url_for, flash
-from routes import index, scheduleMaker
+#from routes import index, scheduleMaker, load_ajax
 from routes import app
 
+
+#this test class will test the function that flask set up all pages successfully and correctly
+#unit test
 
 class FlaskTestCase(unittest.TestCase):
 
@@ -33,12 +37,16 @@ class FlaskTestCase(unittest.TestCase):
 		response = tester.get('/class-select', content_type = 'html/text')
 		self.assertTrue(b'Subject:' in response.data)
 
+
+			
+
+
 	#ensure the botton in first page can lead to the second page
 	#def test_correct_change(self):
 	#	tester = app.test_client(self)
 	#	response = tester.post(
 	#		'/',
-	#		follow_redirects = True;
+	#		 = True;
 	#		)
 	#	self.assertIn(b'Subject:' in response.data)
 
