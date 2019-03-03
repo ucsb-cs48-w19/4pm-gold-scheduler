@@ -35,11 +35,7 @@
 	                    </select>
         </label>
 
-<<<<<<< HEAD
     <button class="button" style="vertical-align:middle" onclick = "addClass(planIndex)"><span>addClass</span></button>
-=======
-    <button class="button" style="vertical-align:middle" onclick = "addClass()"><span>addClass</span></button>
->>>>>>> 660e042a593fcc03df352e59e35348c0da591e87
 
     </br>
 
@@ -49,7 +45,6 @@
         </label>
 
 
-<<<<<<< HEAD
     <button class="button"  onclick = "DropClass(planIndex)"><span>Drop it!</span></button>
     <!-- <button type="button" onclick = "table()">table</button>
     <button type="button" onclick = "deleTable()">detetable</button> -->
@@ -58,14 +53,6 @@
 </header>
 
     <button class="button" id="AddNewPlan" style="vertical-align:middle" onclick = "addNewPlan()"><span>Add New Plan!</span></button>
-=======
-    <button class="button" style="vertical-align:middle" onclick = "DropClass()"><span>Drop it!</span></button>
-    <!-- <button type="button" onclick = "table()">table</button>
-    <button type="button" onclick = "deleTable()">detetable</button> -->
-</header>
-
-    <button class="button" style="vertical-align:middle" onclick = "addNewPlan()"><span>Add New Plan!</span></button>
->>>>>>> 660e042a593fcc03df352e59e35348c0da591e87
 
     <script type="text/javascript">
 
@@ -248,27 +235,18 @@
             var lecValue = document.getElementById("teacherLecTime").value;
             var sectionValue = document.getElementById("section").value;
 
-<<<<<<< HEAD
             var testLecValue = lecValue.split("~");
 
 
-=======
->>>>>>> 660e042a593fcc03df352e59e35348c0da591e87
             if(lecValue == "T B A~T B A~T B A") {
                 return "";
             }
 
 
-<<<<<<< HEAD
             if(testLecValue[1] == "T B A" || testLecValue[2] == "T B A") {
                 return "";
             }
 
-
-
-
-=======
->>>>>>> 660e042a593fcc03df352e59e35348c0da591e87
             var finalData = classValue + "~" + lecValue + "~" + sectionValue;
 
 
@@ -463,11 +441,7 @@
                         addColor(class2[0], class3[j], color[i+1]);
                     }
                 }
-<<<<<<< HEAD
 			    colorIndex = classArr[index].length + 1;
-=======
-			    colorIndex = classArr.length + 1;
->>>>>>> 660e042a593fcc03df352e59e35348c0da591e87
         }
 
 
@@ -653,7 +627,6 @@
         function addNewPlan() {
             var header = document.getElementById("header");
             var btn = document.createElement("BUTTON");
-<<<<<<< HEAD
             //var text = "Plan" + buttonIndex;
             var text;
             do {
@@ -675,17 +648,10 @@
 
             //btn.onclick = printTimeTable(btn.id);
             document.getElementById(buttonIndex).click();
-=======
-            var text = "Plan" + buttonIndex;
-            var t = document.createTextNode(text);       // Create a text node
-            btn.appendChild(t);
-			header.appendChild(btn);
->>>>>>> 660e042a593fcc03df352e59e35348c0da591e87
 			buttonIndex++;
         }
 
 
-<<<<<<< HEAD
         function printTimeTable(id, value) {
             //alert(value);
             //alert(id);
@@ -738,14 +704,11 @@
         }
 
 
-=======
->>>>>>> 660e042a593fcc03df352e59e35348c0da591e87
 
 
 
 	</script>
 </html>
-
 
 
 
