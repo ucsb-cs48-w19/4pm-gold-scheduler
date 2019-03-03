@@ -8,6 +8,7 @@ app = Flask(__name__)
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -101,6 +102,7 @@ def load_ajax3():
     return_list = ''
 
     if (proAndTimes != '~'):
+
         courseName, prof, day, time = proAndTimes.split('~')
         returnData = db.session.query(gs).filter((gs.courseID == courseName) & (gs.proName == prof) & (gs.times == time)).limit(1).all()
 
