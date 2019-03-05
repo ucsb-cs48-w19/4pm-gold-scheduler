@@ -5,56 +5,63 @@
 	<title>Time Table</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="../static/js/addColor.js"></script>
+    <link href="{{ url_for('static', filename='css/mainSelect.css') }}" type="text/css" rel="stylesheet">
     <script src="../static/js/dropdownListAdding.js"></script>
-    <link rel="stylesheet" href="css/mainSelect.css">
 </head>
-<body onload="addSubject()">
+<body onload="addSubject()" onresize="resize()">
 
-    <header>
+<header id="header">
+        <label>Subject: <select id="subject" onchange="postSubject(this.value) ">
+		        <option value="0">--Please Choose--</option>
+	        </select>
+        </label>
 
-	<label>Subject:  <select id="subject" onchange="postSubject(this.value) ">
-		<option value="0">--Please Choose--</option>
-	</select>
-    </label>
 
-	<label>Class: <select id="class1" onchange="postSubClass(this.value)">
-		<option value="0">--Please Choose--</option>
-	</select>
-    </label>
+        <label>Class: <select id="class1" onchange="postSubClass(this.value)">
+		            <option value="0">--Please Choose--</option>
+	            </select>
+        </label>
 
-	<label>Lecture:  <select id="teacherLecTime" onchange="postLectTime(this.value)">
-		<option value="0">--Please Choose--</option>
-	</select>
-    </label>
 
-    <label>Section:  <select id="section">
-		<option value="0">--Please Choose--</option>
-	</select>
-    </label>
-    <button class="button" style="vertical-align:middle" onclick = "addClass()"><span>addClass</span></button>
+
+        <label>Lecture: <select id="teacherLecTime" onchange="postLectTime(this.value)">
+		                    <option value="0">--Please Choose--</option>
+	                </select>
+        </label>
+
+
+        <label> Section: <select id="section">
+		                        <option value="0">--Please Choose--</option>
+	                    </select>
+        </label>
+    </br>
+    <button class="button" style="vertical-align:middle" onclick = "addClass(planIndex)"><span>addClass</span></button>
 
     </br>
 
-    <label>Your Class:  <select id="classOn">
-		<option value="0">Your class will be here!</option>
-	</select>
-    </label>
-  
-
-    <button class="button" style="vertical-align:middle" onclick = "DropClass()"><span>Drop it!</span></button>
+        <label>Your Class: <select id="classOn" style="width: 550px">
+		                        <option value="0">Your class will be here!</option>
+                    </select>
+        </label>
 
 
-    </header>
+    <button class="button"  onclick = "DropClass(planIndex)"><span>Drop it!</span></button>
+    <!-- <button type="button" onclick = "table()">table</button>
+    <button type="button" onclick = "deleTable()">detetable</button> -->
+    </br>
 
+    <button class="button" value="DEFAULT SCHEDULE" id="0" onclick = "printTimeTable(this.id, this.value)"><span>DEFAULT SCHEDULE</span></button>
+</header>
 
-    <footer>
-        <div class="links">
-            <a href="https://my.sa.ucsb.edu/gold/">Take me to UCSB Gold!</a>
-        </div>
-    </footer>
+    <button class="button" id="AddNewPlan" style="vertical-align:middle" onclick = "addNewPlan()"><span>Add New Plan!</span></button>
+    <button class="button" id="Delet" style="vertical-align:middle" onclick = "deletePlan(planIndex)"><span>Delete Current Plan</span></button>
+    <button class="button" id="toGold" style="vertical-align:middle" onclick = "window.open('https://my.sa.ucsb.edu/gold/login.aspx','_blank')"><span>Take me to Gold!</span></button>
 
     <script type="text/javascript">
-    function table() {
+
+    function table(tableName) {
+            if(tableName === undefined) tableName = "DEFAULT SCHEDULE";
+            var body = document.getElementsByTagName("body")[0];
 			var weekDays = ["", "Mon", "Tue", "Wed", "Thr", "Fri"];
 			var time = ["7:00am", "8:00am", "9:00am", "10:00am", "11:00am", "12:00pm",
 			"1:00pm", "2:00pm", "3:00pm", "4:00pm", "5:00pm", "6:00pm", "7:00pm", "8:00pm",
@@ -66,7 +73,7 @@
 			for (var r = 0; r < rows; r++){
 				if(r == 0) {
 					table += '<tr>';
-					table += '<th height = "60" colspan="6" id = "title">' +  'Time Table' + '</th>';
+					table += '<th height = "60" colspan="6" id = "title">' +  tableName + '</th>';
 					// table += '<th colspan= "6">' + Time Table + '</th>';
 					table += '</tr>';
 
@@ -94,8 +101,30 @@
 					table += '</tr>';
 				}
 			}
+            //var tbl = document.createElement("table");
 
-			document.write('<table border=1 bordercolor="lightgray" cellspacing="0" style="width: 100%; height: 100%;">' + table + '</table>');
+
+			//document.write('<table border=1 bordercolor="lightgray" cellspacing="0" style="width: 100%; height: 100%;">' + table + '</table>');
+			//table = '<table border=1 bordercolor="lightgray" cellspacing="0" style="width: 100%; height: 100%;">' + table + '</table>';
+			var htmlObject = document.createElement('table');
+			htmlObject.innerHTML = table;
+			//var text1 = document.createTextNode(table);
+			//tbl.appendChild(text1);
+			body.appendChild(htmlObject);
+			htmlObject.setAttribute("border", "1");
+			htmlObject.setAttribute("bordercolor", "lightgray");
+			htmlObject.setAttribute("cellspacing", "0");
+			htmlObject.setAttribute("style", "width: 100%; height: 100%;");
+			//return table;
+
+			// document.getElementById("Fri22:00").style.backgroundColor = "blue";
+			// for(var i = 0; i < 6; i ++) {
+			// 	document.getElementById('Wed3:00pm').getElementsByTagName('td')[i + 6].style.backgroundColor = "lightblue";
+			// }
+			// for(var i = 0; i < 9; i ++) {
+			// 	document.getElementById('Wed4:00pm').getElementsByTagName('td')[i].style.backgroundColor = "lightblue";
+			// }
+
 
 		}
 
@@ -132,13 +161,7 @@
 
 		var a = 0;
 
-
-
-		var time1 = "Thr1530-1645";
-		var time2 = "Wed1530-1645";
-		var time3 = "Fri0900-0955";
-		var time4 = "Fri0800-1000";
-		table();
+		table("DEFAULT SCHEDULE");
 
 			 // document.getElementById('MonT').getElementsByTagName('td')[115].innerHTML = "Math";
 
@@ -147,25 +170,59 @@
 
 </body>
 
-	<script type="text/javascript">
 
+	<script type="text/javascript">
+        var classArr = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [],
+            [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [],
+            [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [],
+            [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [],
+            [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [],
+            [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [],
+            [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [],
+            [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [],
+            [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []];
         var color =["","Lavender", "MistyRose", "lightgrey", "lightblue", "LightCoral", "LightSkyBlue"];
+        var planIndex = 0;
+        var tableName;
+        var tableIndexArr = ["0"];
+        var conflict = false;
+
 		var subjectArr = {{ displayData|tojson }};
 
-
-
-
-
-
-
-
-
-
-
-		function getValue() {
-		    var classValue = document.getElementById("class1").value;
-		    alert(classValue);
+		    //$.post("/load_ajax", {
+		      // data: JSON.stringify("world"),
+            //}, function(data, status) {
+		      //  alert(data);
+            //});
+        function resize() {
+            document.getElementById(planIndex).click();
         }
+        //window.onresize = resize(planIndex);
+
+        function deleTable() {
+            var element = document.getElementsByTagName("table"), index;
+
+            for (index = element.length - 1; index >= 0; index--) {
+                element[index].parentNode.removeChild(element[index]);
+            }
+            var div = document.getElementsByTagName("div"), index2;
+
+            for (index2 = div.length - 1; index2 >= 0; index2--) {
+                div[index2].parentNode.removeChild(div[index2]);
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 
 		function clearData (string) {
             var s1 = string.substring(1);
@@ -181,15 +238,32 @@
         }
 
 
+
+
+
         function finalSplite() {
             var sub = document.getElementById("subject").value;
             var classValue = document.getElementById("class1").value;
             var lecValue = document.getElementById("teacherLecTime").value;
             var sectionValue = document.getElementById("section").value;
 
+            var testLecValue = lecValue.split("~");
+
+
+            if(lecValue == "T B A~T B A~T B A") {
+                return "";
+            }
+
+
+            if(testLecValue[1] == "T B A" || testLecValue[2] == "T B A") {
+                return "";
+            }
+
             var finalData = classValue + "~" + lecValue + "~" + sectionValue;
 
-            if (finalData == "0~0~0") {
+
+
+            if (finalData == "0~0~0" || finalData == "~~") {
                 return "";
             } else {
 
@@ -337,21 +411,19 @@
         var colorIndex = 1;
 
 
-        function DropClass() {
-
-            var element = document.getElementsByTagName("Table");
-            var x = document.getElementsByTagName("BODY")[0];
-            element.x.removeChild(element);
+        function DropClass(index) {
+            deleTable();
+            table(tableName);
 
             var className = document.getElementById("classOn").value;
             var classIndex = 0;
-            for (var i = 0; i < classArr.length; i ++) {
-                if(className == classArr[i]) {
-                    classArr.splice(i, 1);
+            for (var i = 0; i < classArr[index].length; i ++) {
+                if(className == classArr[index][i]) {
+                    classArr[index].splice(i, 1);
                 }
             }
 
-            var arr1 = classArr;
+            var arr1 = classArr[index];
 
 
 		    var classOn = document.getElementById("classOn");
@@ -374,12 +446,53 @@
 						classOn.appendChild(option1);
 					}
 
-			    for(var i = 0; i < classArr.length; i++) {
-			        var class2 = classArr[i].split("*");
+			    for(var i = 0; i < classArr[index].length; i++) {
+			        var class2 = classArr[index][i].split("*");
                     var class3 = splitClass(class2);
-
+                    for(var j = 1; j < class3.length; j++) {
+                        addColor(class2[0], class3[j], color[i+1]);
+                    }
                 }
+			    colorIndex = classArr[index].length + 1;
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         function splitClass(arr) {
@@ -512,8 +625,124 @@
                 for (i = 0; i < secdate.length; i++) {
                     bigFinalData.push(secTimeFinal[i])
                 }
-                alert(bigFinalData);
+                //alert(bigFinalData);
                 return bigFinalData;
+            }
+        }
+
+
+
+
+
+
+        var buttonIndex = 1;
+        function addNewPlan() {
+            var header = document.getElementById("header");
+            var btn = document.createElement("BUTTON");
+            //var text = "Plan" + buttonIndex;
+            var text;
+            do {
+                text = prompt("What do you want to name this plan?");
+            } while (text === "" );
+
+            if(text === null || text === undefined) {
+                return;
+            }
+
+            var d = document.createElement("div");
+            tableName = text;
+            var t = document.createTextNode(text);       // Create a text node
+            btn.appendChild(t);
+
+			btn.id = buttonIndex;
+			tableIndexArr.push(""+buttonIndex);
+			btn.className = "button";
+			btn.value = text;
+			//btn.onclick = printTimeTable(btn.id);
+            btn.setAttribute( "onClick", "javascript: printTimeTable(this.id, this.value);" );
+            //d.appendChild(btn);
+			header.appendChild(btn);
+
+            //btn.onclick = printTimeTable(btn.id);
+            document.getElementById(buttonIndex).click();
+			buttonIndex++;
+        }
+
+
+        function printTimeTable(id, value) {
+            //alert(value);
+            //alert(id);
+            deleTable();
+
+
+
+            planIndex = parseInt(id, 10);
+            table(value);
+
+            //var className = document.getElementById("classOn").value;
+            var classIndex = 0;
+            //for (var i = 0; i < classArr[planIndex].length; i ++) {
+            //    if(className == classArr[planIndex][i]) {
+            //        classArr[planIndex].splice(i, 1);
+            //    }
+            //}
+
+            var arr1 = classArr[planIndex];
+
+
+		    var classOn = document.getElementById("classOn");
+
+
+			    var options1 = classOn.getElementsByTagName("option");
+			for(var m = 0; m<options1.length; m++)
+			{
+				var op = options1[m];
+				classOn.removeChild(op);
+				m--;
+			}
+
+			    for(var j = 0; j<arr1.length; j++)
+					{
+						var value1 = arr1[j];
+						var option1 = document.createElement("option");
+						var text1 = document.createTextNode(value1);
+						option1.appendChild(text1);
+						classOn.appendChild(option1);
+					}
+
+			    for(var i = 0; i < classArr[planIndex].length; i++) {
+			        var class2 = classArr[planIndex][i].split("*");
+                    var class3 = splitClass(class2);
+                    for(var j = 1; j < class3.length; j++) {
+                        addColor(class2[0], class3[j], color[i+1]);
+                    }
+                }
+			    colorIndex = classArr[planIndex].length + 1;
+        }
+
+
+
+
+
+
+
+        function deletePlan(planIndex) {
+            if(planIndex == 0) {
+                alert("You cannot delete default plan!");
+            } else {
+                var header = document.getElementById("header");
+                var button = document.getElementById(""+planIndex);
+                header.removeChild(button);
+                classArr.splice(planIndex,1);
+                var index = 0;
+                var planIndexS = ""+planIndex;
+                for(var i = 0; i < tableIndexArr.length; i ++) {
+                    if(planIndexS == tableIndexArr[i]) {
+                        index = i;
+                    }
+                }
+                tableIndexArr.splice(index,1);
+                document.getElementById(tableIndexArr[index-1]).click();
             }
         }
 
@@ -521,7 +750,6 @@
 
 	</script>
 </html>
-
 
 
 

@@ -66,6 +66,54 @@ header {
   background-color: #F2F4F4;
 }
 
+#Delet {
+  width: 250px;
+  background-color: darkblue;
+}
+
+footer h1, footer h2{
+  font-weight: 400;
+}
+
+footer h1{
+  font-size: 80px;
+}
+
+footer h2{
+  font-size: 40px;
+}
+
+footer {
+  background: white;
+  font-family: 'Open Sans', sans-serif;
+  text-align: center;
+  margin: 0 auto;
+  padding: 20px;
+  overflow: hidden;
+  color: grey;
+}
+
+footer button{
+  background-color: lightgreen;
+  border: none;
+  color: purple;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+
+footer button:hover{
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+
+
 
 
 
