@@ -7,6 +7,7 @@ function addColor(className, string, color) {
 		if(!(document.getElementById(day + 'T').getElementsByTagName('td')[i + startCell].style.backgroundColor)){
 			document.getElementById(day + 'T').getElementsByTagName('td')[i + startCell].style.backgroundColor = color;
 		} else {
+		    conflict = true;
 			document.getElementById(day + 'T').getElementsByTagName('td')[i + startCell].style.backgroundColor = "red";
 		}
 

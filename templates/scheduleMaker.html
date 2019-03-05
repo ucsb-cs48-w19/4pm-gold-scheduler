@@ -8,7 +8,7 @@
     <link href="{{ url_for('static', filename='css/mainSelect.css') }}" type="text/css" rel="stylesheet">
     <script src="../static/js/dropdownListAdding.js"></script>
 </head>
-<body onload="addSubject()">
+<body onload="addSubject()" onresize="resize()">
 
 <header id="header">
         <label>Subject: <select id="subject" onchange="postSubject(this.value) ">
@@ -34,12 +34,12 @@
 		                        <option value="0">--Please Choose--</option>
 	                    </select>
         </label>
-
+    </br>
     <button class="button" style="vertical-align:middle" onclick = "addClass(planIndex)"><span>addClass</span></button>
 
     </br>
 
-        <label>Your Class: <select id="classOn">
+        <label>Your Class: <select id="classOn" style="width: 550px">
 		                        <option value="0">Your class will be here!</option>
                     </select>
         </label>
@@ -48,11 +48,14 @@
     <button class="button"  onclick = "DropClass(planIndex)"><span>Drop it!</span></button>
     <!-- <button type="button" onclick = "table()">table</button>
     <button type="button" onclick = "deleTable()">detetable</button> -->
-    <br>
+    </br>
+
     <button class="button" value="DEFAULT SCHEDULE" id="0" onclick = "printTimeTable(this.id, this.value)"><span>DEFAULT SCHEDULE</span></button>
 </header>
 
     <button class="button" id="AddNewPlan" style="vertical-align:middle" onclick = "addNewPlan()"><span>Add New Plan!</span></button>
+    <button class="button" id="Delet" style="vertical-align:middle" onclick = "deletePlan(planIndex)"><span>Delete Current Plan</span></button>
+    <button class="button" id="toGold" style="vertical-align:middle" onclick = "window.open('https://my.sa.ucsb.edu/gold/login.aspx','_blank')"><span>Take me to Gold!</span></button>
 
     <script type="text/javascript">
 
@@ -175,10 +178,14 @@
             [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [],
             [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [],
             [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [],
-            [], [], []];
+            [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [],
+            [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [],
+            [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []];
         var color =["","Lavender", "MistyRose", "lightgrey", "lightblue", "LightCoral", "LightSkyBlue"];
         var planIndex = 0;
         var tableName;
+        var tableIndexArr = ["0"];
+        var conflict = false;
 
 		var subjectArr = {{ displayData|tojson }};
 
@@ -187,6 +194,11 @@
             //}, function(data, status) {
 		      //  alert(data);
             //});
+        function resize() {
+            document.getElementById(planIndex).click();
+        }
+        //window.onresize = resize(planIndex);
+
         function deleTable() {
             var element = document.getElementsByTagName("table"), index;
 
@@ -636,15 +648,20 @@
             if(text === null || text === undefined) {
                 return;
             }
+
+            var d = document.createElement("div");
             tableName = text;
             var t = document.createTextNode(text);       // Create a text node
             btn.appendChild(t);
-			header.appendChild(btn);
+
 			btn.id = buttonIndex;
+			tableIndexArr.push(""+buttonIndex);
 			btn.className = "button";
 			btn.value = text;
 			//btn.onclick = printTimeTable(btn.id);
             btn.setAttribute( "onClick", "javascript: printTimeTable(this.id, this.value);" );
+            //d.appendChild(btn);
+			header.appendChild(btn);
 
             //btn.onclick = printTimeTable(btn.id);
             document.getElementById(buttonIndex).click();
@@ -704,6 +721,30 @@
         }
 
 
+
+
+
+
+
+        function deletePlan(planIndex) {
+            if(planIndex == 0) {
+                alert("You cannot delete default plan!");
+            } else {
+                var header = document.getElementById("header");
+                var button = document.getElementById(""+planIndex);
+                header.removeChild(button);
+                classArr.splice(planIndex,1);
+                var index = 0;
+                var planIndexS = ""+planIndex;
+                for(var i = 0; i < tableIndexArr.length; i ++) {
+                    if(planIndexS == tableIndexArr[i]) {
+                        index = i;
+                    }
+                }
+                tableIndexArr.splice(index,1);
+                document.getElementById(tableIndexArr[index-1]).click();
+            }
+        }
 
 
 
