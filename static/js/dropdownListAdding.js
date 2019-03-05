@@ -144,12 +144,12 @@ function addClass(planIndex) {
 	}
 	var contain = classIn.includes(classValue);
 	if (contain) {
-		alert("The class has been registered!");
+		alert("The class is already in your plan!");
 	} else {
 
 		var data = finalSplite();
 		if (data == "") {
-			alert("No time section!");
+			alert("No time section can be added!");
 		} else {
 			var className = data[0];
 			for (var i = 1; i < data.length; i++) {
@@ -182,4 +182,50 @@ function addClass(planIndex) {
 			}
 		}
 	}
+	if(conflict == true) {
+			deleTable();
+            table(tableName);
+
+            var className = finalData;
+            var classIndex = 0;
+            for (var i = 0; i < classArr[planIndex].length; i ++) {
+                if(className == classArr[planIndex][i]) {
+                    classArr[planIndex].splice(i, 1);
+                }
+            }
+
+            var arr1 = classArr[planIndex];
+
+
+		    var classOn = document.getElementById("classOn");
+
+
+			    var options1 = classOn.getElementsByTagName("option");
+			for(var m = 0; m<options1.length; m++)
+			{
+				var op = options1[m];
+				classOn.removeChild(op);
+				m--;
+			}
+
+			    for(var j = 0; j<arr1.length; j++)
+					{
+						var value1 = arr1[j];
+						var option1 = document.createElement("option");
+						var text1 = document.createTextNode(value1);
+						option1.appendChild(text1);
+						classOn.appendChild(option1);
+					}
+
+			    for(var i = 0; i < classArr[planIndex].length; i++) {
+			        var class2 = classArr[planIndex][i].split("*");
+                    var class3 = splitClass(class2);
+                    for(var j = 1; j < class3.length; j++) {
+                        addColor(class2[0], class3[j], color[i+1]);
+                    }
+                }
+			    colorIndex = classArr[planIndex].length + 1;
+			    alert(classValue + " has conflict with other classes! You can not add it on this plan. ");
+	}
+	conflict = false;
 }
