@@ -34,7 +34,7 @@
 		                        <option value="0">--Please Choose--</option>
 	                    </select>
         </label>
-    </br>
+
     <button class="button" style="vertical-align:middle" onclick = "addClass(planIndex)"><span>addClass</span></button>
 
     </br>
@@ -51,11 +51,26 @@
     </br>
 
     <button class="button" value="DEFAULT SCHEDULE" id="0" onclick = "printTimeTable(this.id, this.value)"><span>DEFAULT SCHEDULE</span></button>
-</header>
 
     <button class="button" id="AddNewPlan" style="vertical-align:middle" onclick = "addNewPlan()"><span>Add New Plan!</span></button>
     <button class="button" id="Delet" style="vertical-align:middle" onclick = "deletePlan(planIndex)"><span>Delete Current Plan</span></button>
+
+</header>
+
+<footer>
+
+
+    <p> Click "addClass" to add selected class </p>
+
+    <p> Click "Drop it!" to delete seleted class </p>
+
+    <p> Click "Add New Plan" to make more schedules </p>
+
     <button class="button" id="toGold" style="vertical-align:middle" onclick = "window.open('https://my.sa.ucsb.edu/gold/login.aspx','_blank')"><span>Take me to Gold!</span></button>
+
+    <button class="button" id="toRate" style="vertical-align:middle" onclick = "window.open('https://www.ratemyprofessors.com/campusRatings.jsp?sid=1077')"><span>Rate My Professors?</span></button>    
+
+</footer>
 
     <script type="text/javascript">
 
