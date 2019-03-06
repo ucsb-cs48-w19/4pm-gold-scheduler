@@ -131,6 +131,7 @@ function postLectTime(val) {
 // add classes into weekly schedule table
 // also add classes into fifth dropdown list(user classeslist)
 function addClass(planIndex) {
+	topFunction();
 	var sub = document.getElementById("subject").value;
 	var classValue = document.getElementById("class1").value;
 	var lecValue = document.getElementById("teacherLecTime").value;
