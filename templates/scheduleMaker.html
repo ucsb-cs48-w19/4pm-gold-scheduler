@@ -196,7 +196,7 @@
             [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [],
             [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [],
             [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], []];
-        var color =["","Lavender", "MistyRose", "lightgrey", "lightblue", "LightCoral", "LightSkyBlue"];
+        var color =["","Lavender", "MistyRose", "lightgrey", "lightblue", "LightCoral", "LightSkyBlue", "AliceBlue", "Cyan", "DarkSeaGreen", "HotPink"];
         var planIndex = 0;
         var tableName;
         var tableIndexArr = ["0"];
@@ -427,6 +427,7 @@
 
 
         function DropClass(index) {
+	    topFunction();
             deleTable();
             table(tableName);
 
@@ -687,11 +688,13 @@
         function printTimeTable(id, value) {
             //alert(value);
             //alert(id);
+ 	    topFunction();
             deleTable();
 
 
 
             planIndex = parseInt(id, 10);
+	    tableName = value;
             table(value);
 
             //var className = document.getElementById("classOn").value;
@@ -759,6 +762,11 @@
                 tableIndexArr.splice(index,1);
                 document.getElementById(tableIndexArr[index-1]).click();
             }
+        }
+		
+	function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         }
 
 

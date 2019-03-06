@@ -35,10 +35,6 @@ The user can make their multiple schedules on one page. Easy for them to registe
 6. Use "Plus" bottom to add more schedules.
 
 ## Known Problems
-1. Add delete process
-2. Add more than one schedule
-3. Time conflict formate updating
-4. schedule match time
 
 ## Contributing
 1. Fork it!
