@@ -158,7 +158,6 @@ function addClass(planIndex) {
 			}
 
 			colorIndex++;
-
 			classArr[planIndex].push(finalData);
 
 			var arr1 = classArr[planIndex];
