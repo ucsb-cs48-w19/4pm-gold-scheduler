@@ -25,6 +25,9 @@ The user can make their multiple schedules on one page. Easy for them to registe
 5. Under your project file: `$ virtualenv venv`
 6. Active virtualenv: `$ source venv/bin/activate`
 7. Install requirements from requirements.txt: `$ pip install -r requirements.txt`
+8. To start the app:
+    a. `$ export FLASK_APP=routes.py`
+    b. `$ flask run`
 
 ## Functionality
 1. User open the link above.
