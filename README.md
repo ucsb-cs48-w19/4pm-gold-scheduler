@@ -25,9 +25,24 @@ The user can make their multiple schedules on one page. Easy for them to registe
 5. Under your project file: `$ virtualenv venv`
 6. Active virtualenv: `$ source venv/bin/activate`
 7. Install requirements from requirements.txt: `$ pip install -r requirements.txt`
-8. To start the app:
-    a. `$ export FLASK_APP=routes.py`
-    b. `$ flask run`
+8. Database setup:
+    *  You need a heroku accont. Then, you need to create a project on heroku. Under the project, add-on Heroku Postages.
+    * Under your Heroku Postages, you need to go to setting->view credentials... Copy Hero CLI
+    * Open your terminal, paste the your Heroku CLI. Now you should connect to your database.
+    * Open the routes.py, replace {os.environ['DATABASE_URL']} to your database info. [Reference](https://devcenter.heroku.com/articles/jawsdb#using-jawsdb-with-python-django) 
+    * Open your python console: 
+	    * `>>>from routes import db` 
+	    * `>>>db.create_all()`
+	    *  Now, you have your data table created in database.
+    * Back to the terminal:
+	    * Select your table: `$ select * from Public.”yourTableName”`
+	    * Download the class data(csv file) is from data file on github.
+	    * Import the data: `$ \copy Public."TableName” FROM 'path of the csv file' DELIMITER ',' csv HEADER;`
+9. To start the app:
+    * `$ export FLASK_APP=routes.py`
+    * `$ flask run`
+10. If you want scrap data by yourself, here is a link for a scraper which is written  by UCSB-rooms goup. It is written in python, which is esaier to follow then our java-version. [Link](https://github.com/ucsb-cs48-w19/6pm-ucsb-rooms/blob/master/scraper.py)  
+
 
 ## Functionality
 1. User open the link above.
